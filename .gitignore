@@ -4,11 +4,6 @@ application/logs/
 cache/
 medias/
 
-# Logs and databases #
-######################
-*.log
-*.gz
-
 # OS generated files #
 ######################
 .DS_Store
@@ -21,4 +16,5 @@ ehthumbs.db
 Thumbs.db
 application/config/database.php
 
-*.gz
+
+*.log
