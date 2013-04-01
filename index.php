@@ -33,7 +33,7 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-	if($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '78.238.31.134') define('ENVIRONMENT', 'development');
+	if($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.0.1') define('ENVIRONMENT', 'development');
 	else define('ENVIRONMENT', 'production');
 /*
  *---------------------------------------------------------------

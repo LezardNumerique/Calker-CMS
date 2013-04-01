@@ -5,7 +5,7 @@ class News extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->template['module'] = 'news';
+		$this->template['module'] = 'news';				
 		$this->config->load('config');
 		$this->load->library('newss', '', 'news');
 		$this->load->library('pagination');
