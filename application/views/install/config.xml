@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config version="1.0" type="template">
 	<name>install</name>
-	<date>16/12/2011</date>
+	<date>31/03/20131</date>
 	<author>A.Polounovsky</author>
 	<email>contact@lezard-numerique.net</email>
 	<url>http://www.lezard-numerique.net</url>
 	<copyright>Copyright</copyright>
 	<version>1.0.0</version>
-	<description>Template install</description>
+	<description>Template installation</description>
 </config>

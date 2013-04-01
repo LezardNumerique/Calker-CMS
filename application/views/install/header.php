@@ -32,10 +32,8 @@
 <!-- [Global] start -->
 <div id="global">
 <!-- [Navigation] start -->
-<div id="header_install">
-	<h1>
-		CALKER CMS | Installation
-	</h1>
+<div id="header">
+	<h1>CALKER CMS | Installation</h1>
 </div>
 <!-- [Navigation] end -->
 <!-- [Content] start -->
