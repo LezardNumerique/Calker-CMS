@@ -2,6 +2,7 @@
 ######################
 application/logs/
 medias/
+cache/
 
 # OS generated files #
 ######################
