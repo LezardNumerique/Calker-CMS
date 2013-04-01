@@ -1,8 +1,12 @@
+# Folders #
+######################
 cache/*
+medias/*
 
 # Logs and databases #
 ######################
 *.log
+*.gz
 
 # OS generated files #
 ######################

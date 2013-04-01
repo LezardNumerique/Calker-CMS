@@ -89,7 +89,7 @@ class pages_Model extends CI_Model {
 			$this->db->where($where);
 			$this->db->update($this->config->item('table_pages'));
 		}
-		//Reordinate
+		//--- Reordinate
 		$i = 0;
 		$this->db->order_by('ordering');
 		$this->db->where(array('parent_id' => $parent_id, 'lang' => $this->user->lang));
