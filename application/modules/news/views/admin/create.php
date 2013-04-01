@@ -105,7 +105,7 @@ $(document).ready(function() {
 			show: function(e, ui) {
 				$('#news_tabs').val('#'+ui.panel.id);
 			}
-		 });
+		});
 	});
 	</script>
 </div>

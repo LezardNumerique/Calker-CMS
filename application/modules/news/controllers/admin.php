@@ -102,56 +102,10 @@ class Admin extends CI_Controller {
 
 		$this->load->helper('format');
 
-		//------------- Filtre search
-		$like = '';
-		if ($filter_search = $this->input->post('filter_search'))
-		{
-			$like = $filter_search;
-			$this->session->set_userdata('filter_search', $filter_search);
-		}
-		if($_POST && !$_POST['filter_search'])
-		{
-			$like = '';
-			$this->session->unset_userdata('filter_search');
-		}
-		if($filter_search = $this->session->userdata('filter_search'))
-		{
-			$like = $filter_search;
-		}
-
-		$and_or_like = 'like';
-		if($this->input->post('filter_or'))
-		{
-			$and_or_like = 'or_like';
-			$this->session->set_userdata('filter_or', $and_or_like);
-		}
-		else
-		{
-			$this->session->set_userdata('filter_or', 'like');
-		}
-
-		//------------- Filtre categories
-		$where = '';
-		if ($filter_categories = $this->input->post('filter_categories'))
-		{
-			if ($filter_categories == '-1')
-			{
-				$this->session->unset_userdata('filter_categories');
-			}
-			else
-			{
-				$this->session->set_userdata('filter_categories', $filter_categories);
-			}
-		}
-		if($filter_categories = $this->session->userdata('filter_categories'))
-		{
-			$where = array('categories_id' => $filter_categories);
-		}
-
 		$per_page = $this->news->settings['per_page_news'];
 
-		$news = $this->news->list_news(array('select' => '*', 'start' => $start, 'limit' => $per_page, 'where' => $where, $and_or_like => trim(htmlentities($like))));
-		$total_news =  $this->news->total_list_news(array('where' => $where, $and_or_like => trim(htmlentities($like))));
+		$news = $this->news->list_news(array('select' => '*', 'start' => $start, 'limit' => $per_page));
+		$total_news =  $this->news->total_list_news();
 
 		$this->load->library('pagination');
 

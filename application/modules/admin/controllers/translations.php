@@ -46,7 +46,7 @@
 			$this->template['modules'] = $modules;
 
 			$this->css->add(array('admin'));
-			$this->javascripts->add(array('jquery', 'tablesorter', 'sitelib'));
+			$this->javascripts->add(array('jquery', 'autosize', 'tablesorter', 'sitelib'));
 			$this->layout->load($this->template, $this->config->item('theme_admin'), 'translations/index');
 		}
 

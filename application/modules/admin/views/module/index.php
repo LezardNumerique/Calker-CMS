@@ -38,7 +38,7 @@ $(function() {
 		<?php if ($i % 2 != 0): $rowClass = 'odd'; else: $rowClass = 'even'; endif;?>
 		<tr class="<?php echo $rowClass?>">
 			<td class="center"><?php echo $i;?></td>
-			<td><?php echo ucwords($module['name'])?></td>
+			<td><?php echo ucfirst($module['name'])?></td>
 			<td><?php echo $module['description']?></td>
 			<td><?php echo $module['version']?></td>
 			<td class="center">

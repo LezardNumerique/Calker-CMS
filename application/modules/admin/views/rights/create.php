@@ -11,7 +11,7 @@
 			<label for="group"><?php echo $this->lang->line('label_group');?></label>
 			<select name="group" id="group" class="input_select" />
 				<?php foreach ($groups as $group) : ?>
-				<option value='<?php echo $group['id']?>'<?php if($group['id'] == $right['groups_id']):?>selected="selected"<?php endif;?>><?php echo ucwords($group['title'])?></option>
+				<option value='<?php echo $group['id']?>'<?php if($group['id'] == $right['groups_id']):?>selected="selected"<?php endif;?>><?php echo ucfirst($group['title'])?></option>
 				<?php endforeach; ?>
 			</select>
 			<span class="required"><?php echo $this->lang->line('text_required');?></span>

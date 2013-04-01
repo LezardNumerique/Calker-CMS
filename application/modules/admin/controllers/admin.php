@@ -240,7 +240,7 @@
 				foreach ($stylesheets as $stylesheet)
 				{
 					echo '<div class="theme_colors">';
-					echo '<label for="stylesheet_'.$i.'" style="background:'.$stylesheet['hexa'].'">'.ucwords(str_replace('_', ' ', $stylesheet['color'])).'</label>';
+					echo '<label for="stylesheet_'.$i.'" style="background:'.$stylesheet['hexa'].'">'.ucfirst(str_replace('_', ' ', $stylesheet['color'])).'</label>';
 					echo '<input type="radio" name="stylesheet" id="stylesheet_'.$i.'" value="'.$stylesheet['file'].'" '.(($stylesheet['file'] == $this->system->stylesheet) ? 'checked="checked"' : '').(($i == 1) ? 'checked="checked"' : '').'/>';
 					echo '</div>';
 					$i++;

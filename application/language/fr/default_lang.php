@@ -44,6 +44,7 @@ $lang['btn_sort_descending'] = "Trie descendant";
 $lang['btn_specials'] = "Promotions";
 $lang['btn_update'] = "Mettre à jour";
 $lang['footer_display'] = "Affichage";
+$lang['footer_phone'] = "Tél :";
 $lang['footer_seconds'] = "Secondes";
 $lang['footer_seo'] = "Création site internet Antibes";
 $lang['footer_top'] = "Haut de page";

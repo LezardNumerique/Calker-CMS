@@ -74,10 +74,10 @@
 				<td>
 					<?php if($page['children'] > 0): ?>
 					<span class="lw0_img"><img src="<?php echo site_url(APPPATH.'views/'.$this->config->item('theme_admin').'/img/icons/lv0.gif')?>" alt=""/></span>
-					<span class="lw0"><?php echo anchor($this->config->item('admin_folder').'/'.$module.'/index/'.$page['id'].'/0', html_entity_decode($page['title']));?> [<?php echo anchor($this->config->item('admin_folder').'/'.$module.'/index/'.$page['id'].'/0', "+".$page['children']) ?>]
+					<span class="lw0"><?php echo anchor($this->config->item('admin_folder').'/'.$module.'/index/'.$page['id'].'/0', $page['title']);?> [<?php echo anchor($this->config->item('admin_folder').'/'.$module.'/index/'.$page['id'].'/0', "+".$page['children']) ?>]
 					<?php else: ?></span>
 					<span class="lw1_img"><img src="<?php echo site_url(APPPATH.'views/'.$this->config->item('theme_admin').'/img/icons/lv1.gif')?>" alt=""/></span>
-					<span class="lw1"><?php echo html_entity_decode($page['title']);?></span>
+					<span class="lw1"><?php echo $page['title'];?></span>
 					<?php endif;?>
 				</td>
 				<td><?php echo $page['uri']?></td>

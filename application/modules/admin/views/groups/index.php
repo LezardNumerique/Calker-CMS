@@ -42,7 +42,7 @@
 			<?php if ($i % 2 != 0): $rowClass = 'odd'; else: $rowClass = 'even'; endif;?>
 			<tr class="<?php echo $rowClass?>">
 				<td class="center"><?php echo $i;?></td>
-				<td><?php echo ucwords($group['title']);?></td>
+				<td><?php echo ucfirst($group['title']);?></td>
 				<td class="center">
 					<?php if($group['id'] != 1 && $group['id'] != 2):?>
 					<a href="<?php echo site_url($this->config->item('admin_folder').'/groups/edit/'. $group['id'])?>" title="<?php echo $this->lang->line('btn_edit')?>" class="tooltip"><img src="<?php echo site_url(APPPATH.'views/'.$this->config->item('theme_admin').'/img/icons/edit.png')?>" alt="<?php echo $this->lang->line('btn_edit')?>" width="16px" height="16px"/></a>

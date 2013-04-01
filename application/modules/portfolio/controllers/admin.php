@@ -367,8 +367,8 @@ class Admin extends CI_Controller {
 			$this->session->set_userdata('filter_or', 'like');
 		}
 
-		$medias = $this->portfolio->list_medias(array('select' => '*, '.$this->config->item('table_portfolio_medias').'.id as mID, '.$this->config->item('table_portfolio_medias').'.active as mACTIVE, '.$this->config->item('table_portfolio_medias_lang').'.uri as mURI, '.$this->config->item('table_portfolio_medias_lang').'.title as mTITLE', 'like' => trim(htmlentities($like)), 'start' => $start, 'limit' => $per_page, 'order_by' => $this->config->item('table_portfolio_categories_to_medias').'.ordering'));
-		$total_medias = $this->portfolio->total_list_medias(array('like' => trim(htmlentities($like))));
+		$medias = $this->portfolio->list_medias(array('select' => '*, '.$this->config->item('table_portfolio_medias').'.id as mID, '.$this->config->item('table_portfolio_medias').'.active as mACTIVE, '.$this->config->item('table_portfolio_medias_lang').'.uri as mURI, '.$this->config->item('table_portfolio_medias_lang').'.title as mTITLE', 'like' => trim($like), 'start' => $start, 'limit' => $per_page, 'order_by' => $this->config->item('table_portfolio_categories_to_medias').'.ordering'));
+		$total_medias = $this->portfolio->total_list_medias(array('like' => trim($like)));
 
 		$this->load->library('pagination');
 

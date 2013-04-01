@@ -75,10 +75,10 @@
 				<td>
 					<?php if ($navigation['children'] == 1) :?>
 					<span class="lw0_img"><img src="<?php echo site_url(APPPATH.'views/'.$this->config->item('theme_admin').'/img/icons/lv0.gif')?>" alt=""/></span>
-					<span class="lw0"><a href="<?php echo site_url($this->config->item('admin_folder').'/navigations/index/'.$navigation['id']);?>"><?php echo html_entity_decode($navigation['title']);?></a></span>
+					<span class="lw0"><a href="<?php echo site_url($this->config->item('admin_folder').'/navigations/index/'.$navigation['id']);?>"><?php echo $navigation['title'];?></a></span>
 					<?php else :?>
 					<span class="lw1_img"><img src="<?php echo site_url(APPPATH.'views/'.$this->config->item('theme_admin').'/img/icons/lv1.gif')?>" alt=""/></span>
-					<span class="lw1"><a href="<?php echo site_url($this->config->item('admin_folder').'/navigations/index/'.$navigation['id']);?>"><?php echo html_entity_decode($navigation['title']);?></a></span>
+					<span class="lw1"><a href="<?php echo site_url($this->config->item('admin_folder').'/navigations/index/'.$navigation['id']);?>"><?php echo $navigation['title'];?></a></span>
 					<?php endif;?>
 				</td>
 				<td><?php echo $navigation['uri']?></td>

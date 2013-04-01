@@ -11,19 +11,17 @@
 	<?php if ($alerte = $this->session->flashdata('alert')):?>
 	<p class="alerte alerte_closable" style="display:none"><?php echo $alerte;?></p>
 	<?php endif;?>
-	<form action="<?php echo site_url($this->uri->uri_string()) ?>" method="post" class="search">
-		<table class="table_search">
-			<tr>
-				<td></td>
-				<td>
-					<input type="text" class="input_text" name="filter" value="<?php echo $this->session->userdata('filter_users');?>"/>
-				</td>
-				<td>
+	<div class="pager">
+		<div class="pager_left"></div>
+		<div class="pager_right">
+			<?php echo form_open($this->uri->uri_string(), array('class' => 'search'));?>	
+				<div>
+					<input type="text" class="input_text" name="filter" value="<?php echo $this->session->userdata('filter_users');?>"/>				
 					<input type="submit" class="input_submit" name="submit" value="<?php echo $this->lang->line('btn_search');?>"/>
-				</td>
-			</tr>
-		</table>
-	</form>
+				</div>				
+			</form>
+		</div>
+	</div>
 	<?php if(isset($users) && $users) : ?>
 	<script type="text/javascript">
 	$(function() {
@@ -56,8 +54,8 @@
 			<?php if ($i % 2 != 0): $rowClass = 'odd'; else: $rowClass = 'even'; endif;?>
 			<tr class="<?php echo $rowClass?>">
 				<td class="center"><?php echo ($i*$start)+$i?></td>
-				<td><?php echo ucwords($user['username']);?></td>
-				<td><?php echo ucwords($user['title']);?></td>
+				<td><?php echo ucfirst($user['username']);?></td>
+				<td><?php echo ucfirst($user['title']);?></td>
 				<td><?php echo $user['email'];?></td>
 				<td class="center">
 					<?php if($user['uID'] != 1 && $this->user->id != $user['uID']):?>

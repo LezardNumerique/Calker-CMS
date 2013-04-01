@@ -53,8 +53,8 @@
 			<?php if ($i % 2 != 0): $rowClass = 'odd'; else: $rowClass = 'even'; endif;?>
 			<tr class="<?php echo $rowClass?>">
 				<td class="center"><?php echo $i;?></td>
-				<td><?php echo ucwords($contact['firstname']);?></td>
-				<td><?php echo ucwords($contact['lastname']);?></td>
+				<td><?php echo ucfirst($contact['firstname']);?></td>
+				<td><?php echo ucfirst($contact['lastname']);?></td>
 				<td><?php echo $contact['email'];?></td>
 				<td><?php echo format_phone($contact['phone']);?></td>
 				<td><?php echo $contact['lang'];?></td>

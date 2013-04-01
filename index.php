@@ -1,4 +1,19 @@
 <?php
+/*
+* 2007-2013 CALKER CMS
+*
+* NOTICE OF LICENSE
+*
+*
+* DISCLAIMER
+*
+*
+*  @author Lézard Numérique - A.Polounovsky <contact@lezard-numerique.net>
+*  @copyright  2007-2013 Lézard Numérique - A.Polounovsky
+*  @version  Release: 2.1
+*  @license Copyright
+*  International Registered Trademark & Property of Lézard Numérique - A.Polounovsky
+*/
 
 /*
  *---------------------------------------------------------------

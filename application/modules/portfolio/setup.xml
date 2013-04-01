@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <module>
 	<name>portfolio</name>
-	<date>02/09/2012</date>
+	<date>31/03/2013</date>
 	<author>A.Polounovsky</author>
 	<email>contact@lezard-numerique.net</email>
 	<url>http://www.lezard-numerique.net</url>
@@ -9,4 +9,3 @@
 	<version>1.0.0</version>
 	<description>Portfolio module</description>
 </module>
-

@@ -9,10 +9,10 @@
 					<input type="hidden" name="page_parents_uri" value="<?php echo $page_parent['uri'];?>"/>
 					<input type="hidden" name="page_uri" value="<?php echo str_replace($page_parent['uri'].'/', '', $page['uri']);?>"/>		
 					<label for="title"><?php echo $this->lang->line('label_title');?></label>
-					<input type="text" id="title" name="title" value="<?php echo ($this->input->post('title')) ? $this->input->post('title') : html_entity_decode($navigation['title']);?>" class="input_text" maxlength="128"/>
+					<input type="text" id="title" name="title" value="<?php echo (set_value('title')) ? set_value('title') : $navigation['title'];?>" class="input_text" maxlength="128"/>
 					<span class="required"><?php echo $this->lang->line('text_required');?></span>
 					<label for="uri"><?php echo $this->lang->line('label_uri');?></label>
-					<input type="text" id="uri" name="uri" value="<?php echo ($this->input->post('uri')) ? $this->input->post('uri') : $navigation['uri'];?>" class="input_text" maxlength="128"/>
+					<input type="text" id="uri" name="uri" value="<?php echo (set_value('uri')) ? set_value('uri') : $navigation['uri'];?>" class="input_text" maxlength="128"/>
 					<span class="required"><?php echo $this->lang->line('text_required');?></span>					
 					<label for="parent_id"><?php echo $this->lang->line('label_parent');?></label>
 					<select name="parent_id" class="input_select">
@@ -31,7 +31,7 @@
 							$follow = null;
 						}
 						?>
-						<option value="<?php echo $parent['id']?>" <?php echo ($parent['uri'] == $page_parent['uri'] || $navigation['parent_id'] == $parent['id'] || (isset($parent_id) && ($parent_id == $parent['id']))) ? 'selected="selected"' : '';?>><?php echo ($parent['level'] > 0) ? "|".str_repeat("__", $parent['level']) : '';?> <?php echo html_entity_decode($parent['title']).$follow;?></option>
+						<option value="<?php echo $parent['id']?>" <?php echo ($parent['uri'] != '' && $parent['uri'] == $page_parent['uri'] || $navigation['parent_id'] == $parent['id'] || (isset($parent_id) && ($parent_id == $parent['id']))) ? 'selected="selected"' : '';?>><?php echo ($parent['level'] > 0) ? "|".str_repeat("__", $parent['level']) : '';?> <?php echo character_limiter($parent['title'], 40).$follow;?></option>
 			<?php endforeach;?>
 			</select>
 					<label for="active"><?php echo $this->lang->line('label_status');?></label>

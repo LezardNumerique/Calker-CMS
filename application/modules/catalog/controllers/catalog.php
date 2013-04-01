@@ -40,8 +40,8 @@ class Catalog extends CI_Controller
 					'title'	=> 'Recherche',
 					'uri'	=> $this->template['module'].'/search/'.format_title($keywords).'/index'
 				);
-				$products = $this->catalog->search_products(htmlentities($keywords));
-				$this->session->set_userdata('search_catalog', ucwords($keywords));
+				$products = $this->catalog->search_products($keywords);
+				$this->session->set_userdata('search_catalog', $keywords);
 				$this->session->set_userdata('search_catalog_products', $products);
 				redirect($this->template['module'].'/search/'.format_title($keywords).'/index'.$this->config->item('url_suffix_ext'));
 

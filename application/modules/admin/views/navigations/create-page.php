@@ -6,10 +6,10 @@
 			<fieldset>
 				<div id="one">					
 					<label for="title"><?php echo $this->lang->line('label_title');?></label>
-					<input type="text" id="title" name="title" value="<?php echo ($this->input->post('title')) ? $this->input->post('title') : html_entity_decode($page['title']);?>" class="input_text" maxlength="128"/>
+					<input type="text" id="title" name="title" value="<?php echo (set_value('title')) ? set_value('title') : $page['title'];?>" class="input_text" maxlength="128"/>
 					<span class="required"><?php echo $this->lang->line('text_required');?></span>
 					<label for="uri"><?php echo $this->lang->line('label_uri');?></label>
-					<input type="text" id="uri" name="uri" value="<?php echo ($this->input->post('uri')) ? $this->input->post('uri') : $page['uri'];?>" class="input_text" maxlength="128"/>
+					<input type="text" id="uri" name="uri" value="<?php echo (set_value('uri')) ? set_value('uri') : $page['uri'];?>" class="input_text" maxlength="128"/>
 					<span class="required"><?php echo $this->lang->line('text_required');?></span>					
 					<label for="parent_id"><?php echo $this->lang->line('label_parent');?></label>
 					<select name="parent_id" id="parent_id" class="input_select">
@@ -30,7 +30,7 @@
 						$follow = null;
 					}
 					?>
-					<option value="<?php echo $parent['id']?>" <?php echo ($page['parent_id'] == $parent['id'] || (isset($parent_id) && $parent_id == $parent['id'])) ? 'selected="selected"' : '';?>><?php echo ($parent['level'] > 0) ? "|".str_repeat("__", $parent['level']): '';?> <?php echo (strlen(html_entity_decode($parent['title'])) > 50 ) ? substr(html_entity_decode($parent['title']), 0, 50) . '...' : html_entity_decode($parent['title'])?></option>
+					<option value="<?php echo $parent['id']?>" <?php echo ($page['parent_id'] == $parent['id'] || (isset($parent_id) && $parent_id == $parent['id'])) ? 'selected="selected"' : '';?>><?php echo ($parent['level'] > 0) ? "|".str_repeat("__", $parent['level']): '';?> <?php echo character_limiter($parent['title'], 40)?></option>
 					<?php
 					endforeach;
 					endif;

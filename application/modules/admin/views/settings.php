@@ -41,6 +41,8 @@
 						<input type="text" name="site_email" value="<?php echo $this->system->site_email?>" id="site_email" class="input_text"/>
 						<label for="site_schedule"><?php echo $this->lang->line('label_site_schedule');?></label>
 						<textarea id="site_schedule" name="site_schedule" class="input_textarea" style="height:140px"><?php echo $this->system->site_schedule?></textarea>
+					</div>
+					<div class="left last">
 						<label for="maintenance"><?php echo $this->lang->line('label_maintenance');?></label>
 						<select id="maintenance" name="maintenance" class="input_select">
 							<option <?php if ($this->system->maintenance == 1):?>selected='selected' <?php endif;?>value="1"><?php echo $this->lang->line('option_yes');?></option>
@@ -109,17 +111,18 @@
 						<label for="google_analytics_password"><?php echo $this->lang->line('label_google_analytics_password');?></label>
 						<input type="password" name="google_analytics_password" value="<?php echo $this->system->google_analytics_password?>" id="google_analytics_password" class="input_text"/>
 						<label for="google_analytic_domain"><?php echo $this->lang->line('label_google_analytic_domain');?></label>
-						<input type="text" name="google_analytic_domain" value="<?php echo $this->system->google_analytic_domain?>" id="google_analytic_domain" class="input_text"/>
-						<label for="google_analytic_code"><?php echo $this->lang->line('label_google_analytic_code');?></label>
-						<textarea name="google_analytic_code" id="google_analytic_code" class="input_textarea" style="height:250px;"><?php echo $this->system->google_analytic_code?></textarea>
+						<input type="text" name="google_analytic_domain" value="<?php echo $this->system->google_analytic_domain?>" id="google_analytic_domain" class="input_text"/>											
 						<?php else :?>
 						<input type="hidden" name="google_analytic_ga_id" value="<?php echo $this->system->google_analytic_ga_id?>"/>
 						<input type="hidden" name="google_analytic_ua_id" value="<?php echo $this->system->google_analytic_ua_id?>"/>
 						<input type="hidden" name="google_analytics_email" value="<?php echo $this->system->google_analytics_email?>"/>
 						<input type="hidden" name="google_analytics_password" value="<?php echo $this->system->google_analytics_password?>"/>
-						<input type="hidden" name="google_analytic_domain" value="<?php echo $this->system->google_analytic_domain?>"/>
-						<input type="hidden" name="google_analytic_code" value="<?php echo $this->system->google_analytic_code?>"/>
+						<input type="hidden" name="google_analytic_domain" value="<?php echo $this->system->google_analytic_domain?>"/>					
 						<?php endif;?>
+					</div>
+					<div class="left last">
+						<label for="google_analytic_code"><?php echo $this->lang->line('label_google_analytic_code');?></label>	
+						<textarea name="google_analytic_code" id="google_analytic_code" class="input_textarea" style="height:250px;"><?php echo $this->system->google_analytic_code?></textarea>
 					</div>
 				</div>
 				<div id="three">
@@ -170,7 +173,7 @@
 					<?php foreach ($themes as $theme):?>
 					<?php if (is_file(APPPATH.'views/'.$theme.'/thumb.jpg')):?>
 					<div class="themes">
-						<label for="theme_<?php echo $theme;?>" style="float:none;"><img src="<?php echo site_url(APPPATH.'views/'.$theme.'/thumb.jpg');?>" title="<?php echo ucwords(str_replace('_', ' ', $theme))?>" alt="<?php echo ucwords(str_replace('_', ' ', $theme))?>" width="200" height="150" class="change_theme_color" data-id="<?php echo $theme;?>"/></label>
+						<label for="theme_<?php echo $theme;?>" style="float:none;"><img src="<?php echo site_url(APPPATH.'views/'.$theme.'/thumb.jpg');?>" title="<?php echo ucfirst(str_replace('_', ' ', $theme))?>" alt="<?php echo ucfirst(str_replace('_', ' ', $theme))?>" width="200" height="150" class="change_theme_color" data-id="<?php echo $theme;?>"/></label>
 						<input type="radio" name="theme" id="theme_<?php echo $theme;?>" data-id="<?php echo $theme;?>" value="<?php echo $theme;?>"<?php if ($theme == $this->layout->theme):?> checked="checked"<?php endif;?>/>
 					</div>
 					<?php endif;?>
@@ -180,7 +183,7 @@
 					<div id="ResultStylesheet">
 						<?php $i=1;foreach ($stylesheets as $stylesheet):?>
 						<div class="theme_colors">
-							<label for="stylesheet_<?php echo $i;?>" style="background:<?php echo $stylesheet['hexa'];?>"><?php echo ucwords(str_replace('_', ' ', $stylesheet['color']))?></label>
+							<label for="stylesheet_<?php echo $i;?>" style="background:<?php echo $stylesheet['hexa'];?>"><?php echo ucfirst(str_replace('_', ' ', $stylesheet['color']))?></label>
 							<input type="radio" name="stylesheet" id="stylesheet_<?php echo $i;?>" value="<?php echo $stylesheet['file']?>"<?php if ($stylesheet['file'] == $this->system->stylesheet):?> checked="checked"<?php endif;?>/>
 						</div>
 						<?php $i++;endforeach;?>

@@ -38,7 +38,7 @@
 			<select name="groups_id" class="input_select" id="groups_id">
 			<?php if(isset($groups) && $groups):?>
 			<?php foreach($groups as $group):?>
-			<option value="<?php echo $group['id'];?>"<?php if ($group['id'] == $this->input->post('groups_id') || $group['id'] == $user['groups_id']):?> selected="selected"<?php endif;?>><?php echo ucwords($group['title']);?></option>
+			<option value="<?php echo $group['id'];?>"<?php if ($group['id'] == $this->input->post('groups_id') || $group['id'] == $user['groups_id']):?> selected="selected"<?php endif;?>><?php echo ucfirst($group['title']);?></option>
 			<?php endforeach;?>
 			<?php endif;?>
 			</select>

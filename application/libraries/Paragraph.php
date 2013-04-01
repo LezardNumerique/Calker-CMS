@@ -328,7 +328,7 @@ class Paragraph
 		else
 		{
 			$src_id = $this->obj->input->post('src_id');
-			$data = array('src_id' => $src_id, 'title' => htmlentities($this->obj->input->post('title')), 'class' => $this->obj->input->post('class'), 'body' => $this->obj->input->post('body'), 'module' => $module, 'types_id' => $this->obj->input->post('types_id'), 'lang' => $this->obj->user->lang);
+			$data = array('src_id' => $src_id, 'title' => $this->obj->input->post('title'), 'class' => $this->obj->input->post('class'), 'body' => $this->obj->input->post('body'), 'module' => $module, 'types_id' => $this->obj->input->post('types_id'), 'lang' => $this->obj->user->lang);
 			if($paragraphs_id = $this->obj->input->post('paragraphs_id'))
 			{
 				$data['date_modified'] = mktime();
@@ -388,7 +388,7 @@ class Paragraph
 
 			if(!$this->obj->input->post('paragraphs_id')) $this->_check_ext(array('gif', 'jpg', 'jpeg', 'png'), $module, $src_id, $redirect, $_POST);
 
-			$data = array('src_id' => $src_id, 'title' => htmlentities($this->obj->input->post('title')), 'class' => $this->obj->input->post('class'), 'module' => $module, 'types_id' => $this->obj->input->post('types_id'), 'lang' => $this->obj->user->lang);
+			$data = array('src_id' => $src_id, 'title' => $this->obj->input->post('title'), 'class' => $this->obj->input->post('class'), 'module' => $module, 'types_id' => $this->obj->input->post('types_id'), 'lang' => $this->obj->user->lang);
 			if($paragraphs_id = $this->obj->input->post('paragraphs_id'))
 			{
 				$data['date_modified'] = mktime();
@@ -489,7 +489,7 @@ class Paragraph
 
 			if(!$this->obj->input->post('paragraphs_id')) $this->_check_ext(array('gif', 'jpg', 'jpeg', 'png'), $module, $src_id, $redirect, $_POST);
 
-			$data = array('src_id' => $src_id, 'title' => htmlentities($this->obj->input->post('title')), 'class' => $this->obj->input->post('class'), 'body' => $this->obj->input->post('body'), 'module' => $module, 'types_id' => $this->obj->input->post('types_id'), 'lang' => $this->obj->user->lang);
+			$data = array('src_id' => $src_id, 'title' => $this->obj->input->post('title'), 'class' => $this->obj->input->post('class'), 'body' => $this->obj->input->post('body'), 'module' => $module, 'types_id' => $this->obj->input->post('types_id'), 'lang' => $this->obj->user->lang);
 			if($paragraphs_id = $this->obj->input->post('paragraphs_id'))
 			{
 				$data['date_modified'] = mktime();
@@ -585,7 +585,7 @@ class Paragraph
 
 			if(!$this->obj->input->post('paragraphs_id')) $this->_check_ext(array('swf'), $module, $src_id, $redirect, $_POST);
 
-			$data = array('src_id' => $src_id, 'title' => htmlentities($this->obj->input->post('title')), 'class' => $this->obj->input->post('class'), 'module' => $module, 'types_id' => $this->obj->input->post('types_id'), 'lang' => $this->obj->user->lang);
+			$data = array('src_id' => $src_id, 'title' => $this->obj->input->post('title'), 'class' => $this->obj->input->post('class'), 'module' => $module, 'types_id' => $this->obj->input->post('types_id'), 'lang' => $this->obj->user->lang);
 			if($paragraphs_id = $this->obj->input->post('paragraphs_id'))
 			{
 				$data['date_modified'] = mktime();
@@ -679,7 +679,7 @@ class Paragraph
 
 			if(!$this->obj->input->post('paragraphs_id')) $this->_check_ext(array('flv', 'mp4'), $module, $src_id, $redirect, $_POST);
 
-			$data = array('src_id' => $src_id, 'title' => htmlentities($this->obj->input->post('title')), 'class' => $this->obj->input->post('class'), 'module' => $module, 'types_id' => $this->obj->input->post('types_id'), 'lang' => $this->obj->user->lang);
+			$data = array('src_id' => $src_id, 'title' => $this->obj->input->post('title'), 'class' => $this->obj->input->post('class'), 'module' => $module, 'types_id' => $this->obj->input->post('types_id'), 'lang' => $this->obj->user->lang);
 			if($paragraphs_id = $this->obj->input->post('paragraphs_id'))
 			{
 				$data['date_modified'] = mktime();
@@ -786,7 +786,7 @@ class Paragraph
 		else
 		{
 			$src_id = $this->obj->input->post('src_id');
-			$data = array('src_id' => $src_id, 'title' => htmlentities($this->obj->input->post('title')), 'title_2' => htmlentities($this->obj->input->post('title_2')), 'class' => $this->obj->input->post('class'), 'class_2' => $this->obj->input->post('class_2'), 'body' => $this->obj->input->post('body'), 'body_2' => $this->obj->input->post('body_2'), 'module' => $module, 'types_id' => $this->obj->input->post('types_id'), 'lang' => $this->obj->user->lang);
+			$data = array('src_id' => $src_id, 'title' => $this->obj->input->post('title'), 'title_2' => $this->obj->input->post('title_2'), 'class' => $this->obj->input->post('class'), 'class_2' => $this->obj->input->post('class_2'), 'body' => $this->obj->input->post('body'), 'body_2' => $this->obj->input->post('body_2'), 'module' => $module, 'types_id' => $this->obj->input->post('types_id'), 'lang' => $this->obj->user->lang);
 			if($paragraphs_id = $this->obj->input->post('paragraphs_id'))
 			{
 				$data['date_modified'] = mktime();
@@ -872,7 +872,7 @@ class Paragraph
 		else
 		{
 			$src_id = $this->obj->input->post('src_id');
-			$data = array('src_id' => $src_id, 'title' => htmlentities($this->obj->input->post('title')), 'title_2' => htmlentities($this->obj->input->post('title_2')), 'title_3' => htmlentities($this->obj->input->post('title_3')), 'class' => $this->obj->input->post('class'), 'class_2' => $this->obj->input->post('class_2'), 'class_3' => $this->obj->input->post('class_3'), 'body' => $this->obj->input->post('body'), 'body_2' => $this->obj->input->post('body_2'), 'body_3' => $this->obj->input->post('body_3'), 'module' => $module, 'types_id' => $this->obj->input->post('types_id'), 'lang' => $this->obj->user->lang);
+			$data = array('src_id' => $src_id, 'title' => $this->obj->input->post('title'), 'title_2' => $this->obj->input->post('title_2'), 'title_3' => $this->obj->input->post('title_3'), 'class' => $this->obj->input->post('class'), 'class_2' => $this->obj->input->post('class_2'), 'class_3' => $this->obj->input->post('class_3'), 'body' => $this->obj->input->post('body'), 'body_2' => $this->obj->input->post('body_2'), 'body_3' => $this->obj->input->post('body_3'), 'module' => $module, 'types_id' => $this->obj->input->post('types_id'), 'lang' => $this->obj->user->lang);
 			if($paragraphs_id = $this->obj->input->post('paragraphs_id'))
 			{
 				$data['date_modified'] = mktime();

@@ -1,6 +1,7 @@
 <script type="text/javascript">
 $(function() {
 	$("#table_sort").tablesorter();
+	$('textarea').autosize();
 });
 </script>
 <table class="table_list translation" id="table_sort">
@@ -17,8 +18,8 @@ $(function() {
 			<td>
 				<?php if($key == '1a') echo '<input type="text" name="attr_1a" id="attr_1a" class="input_text" value=""/>';else echo '<label for="'.$key.'">'.$key.'</label>';?>
 			</td>
-			<td>
-				<input type="text" name="<?php echo $key;?>" id="<?php echo $key;?>" value="<?php echo $value;?>" class="input_text"/>
+			<td>				
+				<textarea name="<?php echo $key;?>" id="<?php echo $key;?>" class="input_textarea"><?php echo $value;?></textarea>
 				<a href="javascript:void(0);" title="<?php echo $this->lang->line('btn_delete')?>" onclick="javascript:delete_translations('<?php echo $key;?>');"><img src="<?php echo site_url(APPPATH.'/views/'.$this->config->item('theme_admin').'/img/icons/delete.png')?>" alt="<?php echo $this->lang->line('btn_delete');?>" width="16px" height="16px"/></a>
 				<span style="display:none;"><?php echo $value;?></span>
 			</td>

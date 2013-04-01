@@ -2,34 +2,10 @@
 <!-- [Main] start -->
 <script type="text/javascript">
 $(function() {
-	<?php if($page['id']):?>
-	$('#submit_button').click(function() {
-		$.post('<?php echo site_url($this->config->item('admin_folder').'/'.$module.'/editAjax/'.$page['id']);?>', $("#form_pages").serialize(), function(data) {
-			var data = JSON.parse(data);
-			$("."+data.type).hide();
-			$('.ajax_'+data.type).fadeTo(0, 200);
-			$('.ajax_'+data.type).html(data.text);
-			$("."+data.type+"_closable").append('<a href="#" class="'+data.type+'_close">Fermer</a>');
-		});
+	$('.button_submit').click(function() {
+		$('#pages_redirect').val(1);
+		$('#submit_pages').click();
 	});
-	<?php else:?>
-	$('#submit_button').click(function() {
-		$.post('<?php echo site_url($this->config->item('admin_folder').'/'.$module.'/createAjax');?>', $("#form_pages").serialize(), function(data) {
-			var data = JSON.parse(data);
-			if(data.type == 'notice')
-			{
-				window.location = '<?php echo site_url($this->config->item('admin_folder').'/'.$module.'/edit');?>/'+data.text;
-			}
-			else
-			{
-				$("."+data.type).hide();
-				$('.ajax_'+data.type).fadeTo(0, 200);
-				$('.ajax_'+data.type).html(data.text);
-				$("."+data.type+"_closable").append('<a href="#" class="'+data.type+'_close"><?php echo $this->lang->line('btn_close');?></a>');
-			}
-		});
-	});
-	<?php endif;?>
 	$('.dialog').click(function() {
 		var uri = $(this).attr('href');
 		var title = $(this).attr('title');
@@ -72,11 +48,11 @@ $(function() {
 </script>
 <div id="dialog"></div>
 <div id="main">
-	<h2><?php echo ($page['id'])? $this->lang->line('title_edit_page').' : '.html_entity_decode($page['title']) : $this->lang->line('title_create_page');?></h2>
+	<h2><?php echo ($page['id'])? $this->lang->line('title_edit_page').' : '.$page['title'] : $this->lang->line('title_create_page');?></h2>
 	<?php echo form_open(($page['id']) ? $this->config->item('admin_folder').'/'.$module.'/edit/'.$page['id'] : $this->config->item('admin_folder').'/'.$module.'/create', array('class' => (!$page['id'] ? 'uri_autocomplete' : ''), 'id' => 'form_pages'));?>
 		<ul class="manage">
-			<li><input type="button" name="submit_button" id="submit_button" value="<?php echo $this->lang->line('btn_save')?>" class="input_submit"/></li>
-			<li><input type="submit" name="submit" id="submit" value="<?php echo $this->lang->line('btn_save_quit')?>" class="input_submit"/></li>
+			<li><input type="submit" name="submit" id="submit_pages" value="<?php echo $this->lang->line('btn_save');?>" class="input_submit"/></li>
+			<li><input type="button" name="" value="<?php echo $this->lang->line('btn_save_quit');?>" class="input_submit button_submit"/></li>
 			<?php if($page['id']):?><li><a href="<?php echo site_url($this->config->item('admin_folder').'/'.$module.'/selectParag/'.$page['id']);?>"><?php echo $this->lang->line('btn_create_parag');?></a></li><?php endif;?>
 			<?php if($page['id']):?><li><a href="<?php echo site_url($page['uri']);?>" onclick="window.open(this.href);return false;"><?php echo $this->lang->line('btn_preview');?></a></li><?php endif;?>
 			<?php if($page['id']):?><li><a href="<?php echo site_url($this->config->item('admin_folder').'/'.$module.'/delete/'.$page['id']);?>" onclick="javascript:return confirmDelete();"><?php echo $this->lang->line('btn_delete');?></a></li><?php endif;?>
@@ -98,25 +74,27 @@ $(function() {
 			</ul>
 			<fieldset>
 				<div id="one">
+					<input type="hidden" name="pages_redirect" id="pages_redirect" value="0" />
+					<input type="hidden" name="pages_tabs" id="pages_tabs" value="#one" />
 					<?php if($page['id']):?><input type="hidden" name="pages_id" id="pages_id" value="<?php echo $page['id'];?>"/><?php endif;?>
 					<label for="title"><?php echo $this->lang->line('label_title');?></label>
-					<input type="text" id="title" name="title" value="<?php echo ($this->input->post('title')) ? $this->input->post('title') : html_entity_decode($page['title']);?>" class="input_text" maxlength="128"/>
+					<input type="text" id="title" name="title" value="<?php echo (set_value('title')) ? set_value('title') : $page['title'];?>" class="input_text" maxlength="128"/>
 					<span class="required"><?php echo $this->lang->line('text_required');?></span>
 					<label for="uri"><?php echo $this->lang->line('label_uri');?></label>
-					<input type="text" id="uri" name="uri" value="<?php echo ($this->input->post('uri')) ? $this->input->post('uri') : $page['uri'];?>" class="input_text" maxlength="128"/>										
+					<input type="text" id="uri" name="uri" value="<?php echo (set_value('uri')) ? set_value('uri') : $page['uri'];?>" class="input_text" maxlength="128"/>										
 					<select id="t_uri" name="t_uri" class="input_select target">
 						<option value="0"><?php echo $this->lang->line('option_or_selected');?></option>
 						<?php
 						if(isset($navigations) && $navigations):
 						foreach ($navigations as $navigation):						
 						?>
-						<option value="<?php echo str_replace($parent_uri, '', $navigation['uri']);?>"<?php if($navigation['parent_id'] == 0 || in_array($navigation['uri'], $parents_uri) && $navigation['uri'] != $parent_uri.$page['uri']):?> disabled="disabled"<?php endif;?>><?php echo ($navigation['level'] > 0 ? "|".str_repeat("__", $navigation['level']) : '').character_limiter(html_entity_decode($navigation['title']), 40);?></option>
+						<option value="<?php echo str_replace($parent_uri, '', $navigation['uri']);?>"<?php if($navigation['parent_id'] == 0 || in_array($navigation['uri'], $parents_uri) && $navigation['uri'] != $parent_uri.$page['uri']):?> disabled="disabled"<?php endif;?>><?php echo ($navigation['level'] > 0 ? "|".str_repeat("__", $navigation['level']) : '').character_limiter($navigation['title'], 40);?></option>
 						<?php endforeach;endif;?>
 					</select>
 					<a href="<?php echo site_url($this->config->item('admin_folder').'/'.$module.'/createNavigation/'.$page['id'].'/'.$parent_id);?>" class="dialog" title="<?php echo $this->lang->line('btn_create_navigation');?>"><img src="<?php echo site_url(APPPATH.'views/'.$this->config->item('theme_admin').'/img/icons/more.png');?>" alt="<?php echo $this->lang->line('btn_create_navigation');?>" width="16" height="16"/></a>
 					<span class="required" style="margin-left:0;"><?php echo $this->lang->line('text_required');?></span>
 					<label for="class"><?php echo $this->lang->line('label_class');?></label>
-					<input type="text" id="class" name="class" value="<?php echo ($this->input->post('class')) ? $this->input->post('class') : $page['class'];?>" class="input_text" maxlength="32"/>
+					<input type="text" id="class" name="class" value="<?php echo (set_value('class')) ? set_value('class') : $page['class'];?>" class="input_text" maxlength="32"/>
 					<label for="parent_id"><?php echo $this->lang->line('label_parent');?></label>
 					<select name="parent_id" id="parent_id" class="input_select">
 					<option value="0"></option>
@@ -136,7 +114,7 @@ $(function() {
 						$follow = null;
 					}
 					?>
-					<option value="<?php echo $parent['id']?>" <?php echo ($page['parent_id'] == $parent['id'] || (isset($parent_id) && $parent_id == $parent['id'])) ? 'selected="selected"' : '';?>><?php echo ($parent['level'] > 0) ? "|".str_repeat("__", $parent['level']): '';?> <?php echo (strlen(html_entity_decode($parent['title'])) > 50 ) ? substr(html_entity_decode($parent['title']), 0, 50) . '...' : html_entity_decode($parent['title'])?></option>
+					<option value="<?php echo $parent['id']?>" <?php echo ($page['parent_id'] == $parent['id'] || (isset($parent_id) && $parent_id == $parent['id'])) ? 'selected="selected"' : '';?>><?php echo ($parent['level'] > 0) ? "|".str_repeat("__", $parent['level']): '';?> <?php echo character_limiter($parent['title'], 40)?></option>
 					<?php
 					endforeach;
 					endif;
@@ -144,28 +122,28 @@ $(function() {
 					</select>
 					<label for="active"><?php echo $this->lang->line('label_status');?></label>
 					<select name="active" id="active" class="input_select">
-						<option value="0"<?php if ($this->input->post('active') == 0 || $page['active'] == 0) echo ' selected="selected"';?>><?php echo $this->lang->line('option_desactivate');?></option>
-						<option value="1"<?php if ($this->input->post('active') == 1 || $page['active'] == 1) echo ' selected="selected"';?>><?php echo $this->lang->line('option_activate');?></option>
+						<option value="0"<?php if (set_value('active') == 0 || $page['active'] == 0) echo ' selected="selected"';?>><?php echo $this->lang->line('option_desactivate');?></option>
+						<option value="1"<?php if (set_value('active') == 1 || $page['active'] == 1) echo ' selected="selected"';?>><?php echo $this->lang->line('option_activate');?></option>
 					</select>
 				</div>
 				<div id="two">
 					<label for="meta_title"><?php echo $this->lang->line('label_meta_title');?></label>
-					<input type="text" id="meta_title" name="meta_title" value="<?php echo ($this->input->post('meta_title')) ? $this->input->post('meta_title') : html_entity_decode($page['meta_title']);?>" class="input_text" maxlength="128"/>
+					<input type="text" id="meta_title" name="meta_title" value="<?php echo (set_value('meta_title')) ? set_value('meta_title') : $page['meta_title'];?>" class="input_text" maxlength="128"/>
 					<label for="meta_keywords"><?php echo $this->lang->line('label_meta_keywords');?></label>
-					<input type="text" id="meta_keywords" name="meta_keywords" value="<?php echo ($this->input->post('meta_keywords')) ? $this->input->post('meta_keywords') : $page['meta_keywords'];?>" class="input_text" maxlength="255"/>
+					<input type="text" id="meta_keywords" name="meta_keywords" value="<?php echo (set_value('meta_keywords')) ? set_value('meta_keywords') : $page['meta_keywords'];?>" class="input_text" maxlength="255"/>
 					<label for="meta_description"><?php echo $this->lang->line('label_meta_description');?></label>
-					<input type="text" id="meta_description" name="meta_description" value="<?php echo ($this->input->post('meta_description')) ? $this->input->post('meta_description') : $page['meta_description'];?>" class="input_text" maxlength="255"/>
+					<input type="text" id="meta_description" name="meta_description" value="<?php echo (set_value('meta_description')) ? set_value('meta_description') : $page['meta_description'];?>" class="input_text" maxlength="255"/>
 				</div>
 				<div id="three">
 					<label for="show_sub_pages"><?php echo $this->lang->line('label_show_sub_pages');?></label>
 					<select name="show_sub_pages" id="show_sub_pages" class="input_select">
-					<option value='0'<?php if ($this->input->post('show_sub_pages') == 0 || $page['show_sub_pages'] == 0) echo ' selected="selected"';?>><?php echo $this->lang->line('option_no');?></option>
-					<option value='1'<?php if ($this->input->post('show_sub_pages') == 1 || $page['show_sub_pages'] == 1) echo ' selected="selected"';?>><?php echo $this->lang->line('option_yes');?></option>
+					<option value='0'<?php if (set_value('show_sub_pages') == 0 || $page['show_sub_pages'] == 0) echo ' selected="selected"';?>><?php echo $this->lang->line('option_no');?></option>
+					<option value='1'<?php if (set_value('show_sub_pages') == 1 || $page['show_sub_pages'] == 1) echo ' selected="selected"';?>><?php echo $this->lang->line('option_yes');?></option>
 					</select>
 					<label for="show_navigation"><?php echo $this->lang->line('label_show_navigation');?></label>
 					<select name="show_navigation" id="show_navigation" class="input_select">
-					<option value="0"<?php if ($this->input->post('show_navigation') == 0 || $page['show_navigation'] == 0) echo ' selected="selected"';?>><?php echo $this->lang->line('option_no');?></option>
-					<option value="1"<?php if ($this->input->post('show_navigation') == 1 || $page['show_navigation'] == 1) echo ' selected="selected"';?>><?php echo $this->lang->line('option_yes');?></option>
+					<option value="0"<?php if (set_value('show_navigation') == 0 || $page['show_navigation'] == 0) echo ' selected="selected"';?>><?php echo $this->lang->line('option_no');?></option>
+					<option value="1"<?php if (set_value('show_navigation') == 1 || $page['show_navigation'] == 1) echo ' selected="selected"';?>><?php echo $this->lang->line('option_yes');?></option>
 					</select>
 				</div>
 			</fieldset>
@@ -173,7 +151,11 @@ $(function() {
 	</form>
 	<script type="text/javascript">
 	$(function() {
-		$("#tabs").tabs();
+		$("#tabs").tabs({
+			show: function(e, ui) {
+				$('#pages_tabs').val('#'+ui.panel.id);
+			}
+		});
 		$("#sortable").sortable({
 			update : function () {
 				order = [];

@@ -2117,7 +2117,7 @@ if (!defined('__CLASS_HTML2PDF__'))
 			if ($this->style->value['text-transform']!='none')
 			{
 				if ($this->style->value['text-transform']=='capitalize')
-					$txt = ucwords($txt);
+					$txt = ucfirst($txt);
 				else if ($this->style->value['text-transform']=='uppercase')
 					$txt = strtoupper($txt);
 				else if ($this->style->value['text-transform']=='lowercase')

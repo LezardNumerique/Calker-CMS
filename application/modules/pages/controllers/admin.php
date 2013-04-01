@@ -17,32 +17,42 @@ class Admin extends CI_Controller {
 			array(
 				'field'   => 	'title',
 				'label'   => 	$this->lang->line('validation_title'),
-				'rules'   => 	'trim|required|max_length[128]|xss_clean'
+				'rules'   => 	'trim|required|max_length[128]|htmlspecialchars|xss_clean'
 			),
 			array(
 				'field'   => 	'uri',
 				'label'   => 	$this->lang->line('validation_uri'),
-				'rules'   => 	'trim|required|max_length[128]|xss_clean|callback__verify_uri'
+				'rules'   => 	'trim|required|max_length[128]|htmlspecialchars|xss_clean|callback__verify_uri'
 			),
 			array(
 				'field'   => 	'class',
 				'label'   => 	$this->lang->line('validation_class'),
-				'rules'   => 	'trim|max_length[32]|xss_clean'
+				'rules'   => 	'trim|max_length[32]|htmlspecialchars|xss_clean'
 			),
 			array(
 				'field'   => 	'meta_title',
 				'label'   => 	$this->lang->line('validation_meta_title'),
-				'rules'   => 	'trim|max_length[255]|xss_clean'
+				'rules'   => 	'trim|max_length[128]|htmlspecialchars|xss_clean'
 			),
 			array(
 				'field'   => 	'meta_keywords',
 				'label'   => 	$this->lang->line('validation_meta_keywords'),
-				'rules'   => 	'trim|max_length[255]|xss_clean'
+				'rules'   => 	'trim|max_length[255]|htmlspecialchars|xss_clean'
 			),
 			array(
 				'field'   => 	'meta_description',
 				'label'   => 	$this->lang->line('validation_meta_description'),
-				'rules'   => 	'trim|xss_clean'
+				'rules'   => 	'trim|max_length[255]|htmlspecialchars|xss_clean'
+			),
+			array(
+				'field'   => 	'pages_redirect',
+				'label'   => 	$this->lang->line('validation_redirect'),
+				'rules'   => 	'trim|numeric|max_length[1]|htmlspecialchars|xss_clean'
+			),
+			array(
+				'field'   => 	'pages_tabs',
+				'label'   => 	$this->lang->line('validation_tabs'),
+				'rules'   => 	'trim|htmlspecialchars|htmlspecialchars|xss_clean'
 			)
 		);
 		
@@ -50,37 +60,37 @@ class Admin extends CI_Controller {
 			array(
 				'field'   => 	'parent_id',
 				'label'   => 	$this->lang->line('validation_parent_id'),
-				'rules'   => 	'trim|numeric|xss_clean'
+				'rules'   => 	'trim|numeric|htmlspecialchars|xss_clean'
 			),
 			array(
 				'field'   => 	'page_parents_id',
 				'label'   => 	$this->lang->line('validation_page_parents_id'),
-				'rules'   => 	'trim|numeric|xss_clean'
+				'rules'   => 	'trim|numeric|htmlspecialchars|xss_clean'
 			),
 			array(
 				'field'   => 	'page_parents_uri',
 				'label'   => 	$this->lang->line('validation_page_parents_uri'),
-				'rules'   => 	'trim|max_length[64]|xss_clean'
+				'rules'   => 	'trim|max_length[64]|htmlspecialchars|xss_clean'
 			),
 			array(
 				'field'   => 	'page_uri',
 				'label'   => 	$this->lang->line('validation_page_uri'),
-				'rules'   => 	'trim|max_length[64]|xss_clean'
+				'rules'   => 	'trim|max_length[64]|htmlspecialchars|xss_clean'
 			),			
 			array(
 				'field'   => 	'active',
 				'label'   => 	$this->lang->line('validation_active'),
-				'rules'   => 	'trim|numeric|exact_length[1]|xss_clean'
+				'rules'   => 	'trim|numeric|exact_length[1]|htmlspecialchars|xss_clean'
 			),
 			array(
 				'field'   => 	'title',
 				'label'   => 	$this->lang->line('validation_title'),
-				'rules'   => 	'trim|required|max_length[128]|xss_clean'
+				'rules'   => 	'trim|required|max_length[128]|htmlspecialchars|xss_clean'
 			),
 			array(
 				'field'   => 	'uri',
 				'label'   => 	$this->lang->line('validation_uri'),
-				'rules'   => 	'trim|required|max_length[128]|xss_clean|callback__verify_uri'
+				'rules'   => 	'trim|required|max_length[128]|xss_clean|htmlspecialchars|callback__verify_uri'
 			)
 		);
 
@@ -219,16 +229,16 @@ class Admin extends CI_Controller {
 		{
 			$data = array(
 				'ordering'				=> 99999,
-				'parent_id'				=> strip_tags($this->input->post('parent_id')),
-				'active'				=> strip_tags($this->input->post('active')),
-				'title'					=> htmlentities($this->input->post('title')),
-				'class'					=> strip_tags($this->input->post('class')),
+				'parent_id'				=> $this->input->post('parent_id'),
+				'active'				=> $this->input->post('active'),
+				'title'					=> set_value('title'),
+				'class'					=> $this->input->post('class'),
 				'lang'					=> $this->user->lang,
-				'meta_title'			=> htmlentities($this->input->post('meta_title')),
-				'meta_keywords'			=> strip_tags($this->input->post('meta_keywords')),
-				'meta_description'		=> strip_tags($this->input->post('meta_description')),
-				'show_sub_pages'		=> strip_tags($this->input->post('show_sub_pages')),
-				'show_navigation'		=> strip_tags($this->input->post('show_navigation')),
+				'meta_title'			=> $this->input->post('meta_title'),
+				'meta_keywords'			=> $this->input->post('meta_keywords'),
+				'meta_description'		=> $this->input->post('meta_description'),
+				'show_sub_pages'		=> $this->input->post('show_sub_pages'),
+				'show_navigation'		=> $this->input->post('show_navigation'),
 				'date_added'			=> mktime()
 			);
 
@@ -240,10 +250,13 @@ class Admin extends CI_Controller {
 			}
 			$data['uri'] = $parent_uri.format_title($this->input->post('uri'));
 
-			$this->model->save('', $data);
+			$pages_id = $this->model->save('', $data);
 			if($this->system->cache == 1) $this->cache->remove_group($this->template['module']);
 			$this->session->set_flashdata('notification', $this->lang->line('notification_save'));
-			redirect($this->session->userdata('redirect_uri'));
+			if(set_value('pages_redirect') == 1)
+				redirect($this->session->userdata('redirect_uri'));
+			else
+				redirect($this->config->item('admin_folder').'/'.$this->template['module'].'/edit/'.$pages_id.set_value('pages_tabs'));
 		}
 	}
 
@@ -303,16 +316,16 @@ class Admin extends CI_Controller {
 		else
 		{
 			$data = array(
-				'parent_id'				=> strip_tags($this->input->post('parent_id')),
-				'active'				=> strip_tags($this->input->post('active')),
-				'title'					=> htmlentities($this->input->post('title')),
-				'class'					=> strip_tags($this->input->post('class')),
+				'parent_id'				=> $this->input->post('parent_id'),
+				'active'				=> $this->input->post('active'),
+				'title'					=> $this->input->post('title'),
+				'class'					=> $this->input->post('class'),
 				'lang'					=> $this->user->lang,
-				'meta_title'			=> htmlentities($this->input->post('meta_title')),
-				'meta_keywords'			=> strip_tags($this->input->post('meta_keywords')),
-				'meta_description'		=> strip_tags($this->input->post('meta_description')),
-				'show_sub_pages'		=> strip_tags($this->input->post('show_sub_pages')),
-				'show_navigation'		=> strip_tags($this->input->post('show_navigation')),
+				'meta_title'			=> $this->input->post('meta_title'),
+				'meta_keywords'			=> $this->input->post('meta_keywords'),
+				'meta_description'		=> $this->input->post('meta_description'),
+				'show_sub_pages'		=> $this->input->post('show_sub_pages'),
+				'show_navigation'		=> $this->input->post('show_navigation'),
 				'date_modified'			=> mktime()
 			);
 
@@ -324,99 +337,14 @@ class Admin extends CI_Controller {
 			}
 			$data['uri'] = $parent_uri.format_title($this->input->post('uri'));
 
-			$this->model->save($this->input->post('pages_id'), $data);
+			$pages_id = $this->model->save($this->input->post('pages_id'), $data);
 			if($this->system->cache == 1) $this->cache->remove_group($this->template['module']);
 			$this->session->set_flashdata('notification', $this->lang->line('notification_save'));
-			redirect($this->session->userdata('redirect_uri'));
+			if(set_value('pages_redirect') == 1)
+				redirect($this->session->userdata('redirect_uri'));
+			else
+				redirect($this->config->item('admin_folder').'/'.$this->template['module'].'/edit/'.$pages_id.set_value('pages_tabs'));
 		}
-	}
-
-	public function createAjax()
-	{
-		$this->user->check_level($this->template['module'], LEVEL_EDIT);
-
-		$this->form_validation->set_rules($this->fields_validation);
-
-		$this->form_validation->set_error_delimiters('', '<br />');
-
-		if ($this->form_validation->run() == TRUE)
-		{
-			$data = array(
-				'ordering'				=> 99999,
-				'parent_id'				=> strip_tags($this->input->post('parent_id')),
-				'active'				=> strip_tags($this->input->post('active')),
-				'title'					=> htmlentities($this->input->post('title')),
-				'class'					=> strip_tags($this->input->post('class')),
-				'lang'					=> $this->user->lang,
-				'meta_title'			=> htmlentities($this->input->post('meta_title')),
-				'meta_keywords'			=> strip_tags($this->input->post('meta_keywords')),
-				'meta_description'		=> strip_tags($this->input->post('meta_description')),
-				'show_sub_pages'		=> strip_tags($this->input->post('show_sub_pages')),
-				'show_navigation'		=> strip_tags($this->input->post('show_navigation')),
-				'date_modified'			=> mktime()
-			);
-
-			$parent_uri = '';
-			if ($parent_id = $this->input->post('parent_id'))
-			{
-				$parent = $this->page->get_pages(array('id' => $parent_id));
-				if($parent['uri'] != $this->page->settings['page_home']) $parent_uri = $parent['uri'].'/';
-			}
-			$data['uri'] = $parent_uri.format_title($this->input->post('uri'));
-
-			$this->session->set_flashdata('notification', $this->lang->line('notification_save'));
-			if($this->system->cache == 1) $this->cache->remove_group($this->template['module']);
-			echo json_encode(array('type' => 'notice', 'text' => $this->model->save('', $data)));
-		}
-		else
-		{
-			echo json_encode(array('type' => 'alerte', 'text' => validation_errors()));
-		}
-
-	}
-
-	public function editAjax($pages_id = '')
-	{
-		$this->user->check_level($this->template['module'], LEVEL_EDIT);
-
-		$this->form_validation->set_rules($this->fields_validation);
-
-		$this->form_validation->set_error_delimiters('', '<br />');
-
-		if ($this->form_validation->run() == TRUE)
-		{
-			$data = array(
-				'parent_id'				=> strip_tags($this->input->post('parent_id')),
-				'active'				=> strip_tags($this->input->post('active')),
-				'title'					=> htmlentities($this->input->post('title')),
-				'uri'					=> format_title($this->input->post('uri')),
-				'class'					=> strip_tags($this->input->post('class')),
-				'lang'					=> $this->user->lang,
-				'meta_title'			=> htmlentities($this->input->post('meta_title')),
-				'meta_keywords'			=> strip_tags($this->input->post('meta_keywords')),
-				'meta_description'		=> strip_tags($this->input->post('meta_description')),
-				'show_sub_pages'		=> strip_tags($this->input->post('show_sub_pages')),
-				'show_navigation'		=> strip_tags($this->input->post('show_navigation')),
-				'date_modified'			=> mktime()
-			);
-
-			$parent_uri = '';
-			if ($parent_id = $this->input->post('parent_id'))
-			{
-				$parent = $this->page->get_pages(array('id' => $parent_id));
-				if($parent['uri'] != $this->page->settings['page_home']) $parent_uri = $parent['uri'].'/';
-			}
-			$data['uri'] = $parent_uri.format_title($this->input->post('uri'));
-
-			$this->model->save($this->input->post('pages_id'), $data);
-			if($this->system->cache == 1) $this->cache->remove_group($this->template['module']);
-			echo json_encode(array('type' => 'notice', 'text' => $this->lang->line('notification_save')));
-		}
-		else
-		{
-			echo json_encode(array('type' => 'alerte', 'text' => validation_errors()));
-		}
-
 	}
 
 	public function flag($src_id = '', $flag = '')
@@ -527,16 +455,16 @@ class Admin extends CI_Controller {
 		{
 			$data = array(
 				'ordering'				=> 999,
-				'parent_id'				=> strip_tags($this->input->post('parent_id')),
-				'active'				=> strip_tags($this->input->post('active')),
-				'title'					=> htmlentities($this->input->post('title')),
-				'class'					=> strip_tags($this->input->post('class')),
+				'parent_id'				=> $this->input->post('parent_id'),
+				'active'				=> $this->input->post('active'),
+				'title'					=> $this->input->post('title'),
+				'class'					=> $this->input->post('class'),
 				'lang'					=> $this->user->lang,
-				'meta_title'			=> htmlentities($this->input->post('meta_title')),
-				'meta_keywords'			=> strip_tags($this->input->post('meta_keywords')),
-				'meta_description'		=> strip_tags($this->input->post('meta_description')),
-				'show_sub_pages'		=> strip_tags($this->input->post('show_sub_pages')),
-				'show_navigation'		=> strip_tags($this->input->post('show_navigation')),
+				'meta_title'			=> $this->input->post('meta_title'),
+				'meta_keywords'			=> $this->input->post('meta_keywords'),
+				'meta_description'		=> $this->input->post('meta_description'),
+				'show_sub_pages'		=> $this->input->post('show_sub_pages'),
+				'show_navigation'		=> $this->input->post('show_navigation'),
 				'date_added'			=> mktime()
 			);
 
@@ -600,16 +528,16 @@ class Admin extends CI_Controller {
 		{
 			$data = array(
 				'ordering'				=> 999,
-				'parent_id'				=> strip_tags($this->input->post('parent_id')),
-				'active'				=> strip_tags($this->input->post('active')),
-				'title'					=> htmlentities($this->input->post('title')),
-				'class'					=> strip_tags($this->input->post('class')),
+				'parent_id'				=> $this->input->post('parent_id'),
+				'active'				=> $this->input->post('active'),
+				'title'					=> $this->input->post('title'),
+				'class'					=> $this->input->post('class'),
 				'lang'					=> $this->user->lang,
-				'meta_title'			=> htmlentities($this->input->post('meta_title')),
-				'meta_keywords'			=> strip_tags($this->input->post('meta_keywords')),
-				'meta_description'		=> strip_tags($this->input->post('meta_description')),
-				'show_sub_pages'		=> strip_tags($this->input->post('show_sub_pages')),
-				'show_navigation'		=> strip_tags($this->input->post('show_navigation')),
+				'meta_title'			=> $this->input->post('meta_title'),
+				'meta_keywords'			=> $this->input->post('meta_keywords'),
+				'meta_description'		=> $this->input->post('meta_description'),
+				'show_sub_pages'		=> $this->input->post('show_sub_pages'),
+				'show_navigation'		=> $this->input->post('show_navigation'),
 				'date_modified'			=> mktime()
 			);
 

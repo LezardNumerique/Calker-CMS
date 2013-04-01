@@ -18,12 +18,22 @@
 				array(
 					'field'   => 	'title',
 					'label'   => 	$this->lang->line('validation_title'),
-					'rules'   => 	'trim|required|max_length[64]|xss_clean'
+					'rules'   => 	'trim|required|max_length[64]|htmlspecialchars|xss_clean'
 				),
 				array(
 					'field'   => 	'uri',
 					'label'   => 	$this->lang->line('validation_uri'),
-					'rules'   => 	'trim|max_length[128]|xss_clean'
+					'rules'   => 	'trim|max_length[128]|htmlspecialchars|xss_clean'
+				),
+				array(
+					'field'   => 	'navigations_redirect',
+					'label'   => 	$this->lang->line('validation_redirect'),
+					'rules'   => 	'trim|numeric|max_length[1]|htmlspecialchars|xss_clean'
+				),
+				array(
+					'field'   => 	'navigations_tabs',
+					'label'   => 	$this->lang->line('validation_tabs'),
+					'rules'   => 	'trim|htmlspecialchars|htmlspecialchars|xss_clean'
 				)
 			);
 			
@@ -31,22 +41,22 @@
 				array(
 					'field'   => 	'parent_id',
 					'label'   => 	$this->lang->line('validation_parent_id'),
-					'rules'   => 	'trim|numeric|xss_clean'
+					'rules'   => 	'trim|numeric|htmlspecialchars|xss_clean'
 				),
 				array(
 					'field'   => 	'active',
 					'label'   => 	$this->lang->line('validation_active'),
-					'rules'   => 	'trim|numeric|exact_length[1]|xss_clean'
+					'rules'   => 	'trim|numeric|exact_length[1]|htmlspecialchars|xss_clean'
 				),
 				array(
 					'field'   => 	'title',
 					'label'   => 	$this->lang->line('validation_title'),
-					'rules'   => 	'trim|required|max_length[128]|xss_clean'
+					'rules'   => 	'trim|required|max_length[128]|htmlspecialchars|xss_clean'
 				),
 				array(
 					'field'   => 	'uri',
 					'label'   => 	$this->lang->line('validation_uri'),
-					'rules'   => 	'trim|required|max_length[128]|xss_clean|callback__verify_uri'
+					'rules'   => 	'trim|required|max_length[128]|htmlspecialchars|xss_clean|callback__verify_uri'
 				)
 			);
 
@@ -168,51 +178,6 @@
 			$this->layout->load($this->template, $this->config->item('theme_admin'), 'navigations/create');
 		}
 
-		public function saveAjax()
-		{
-			$this->user->check_level($this->template['module'], LEVEL_ADD);
-
-			$this->form_validation->set_rules($this->fields_validation);
-
-			$this->form_validation->set_error_delimiters('', '<br />');
-
-			if ($this->form_validation->run() == TRUE)
-			{
-				if($this->input->post('uri') == '#') $uri = '#';
-				if ($this->input->post('uri') != '') $uri = format_title($this->input->post('uri'), false);
-				else $uri = '';
-
-				$data = array(
-					'lang' 			=> $this->user->lang,
-					'parent_id' 	=> $this->input->post('parent_id'),
-					'active' 		=> $this->input->post('active'),
-					'module' 		=> $this->input->post('module'),
-					'title' 		=> htmlentities($this->input->post('title')),
-					'uri' 			=> $uri
-				);
-
-				if($id = $this->input->post('id'))
-				{
-					$this->db->where('id', $id);
-					$this->db->update($this->config->item('table_navigation'), $data);
-					$text = $this->lang->line('notification_save');
-				}
-				else
-				{
-					$data['ordering'] = 999;
-					$this->db->insert($this->config->item('table_navigation'), $data);
-					$text = $this->db->insert_id();
-				}
-				echo json_encode(array('type' => 'notice', 'text' => $text));
-			}
-			else
-			{
-				echo json_encode(array('type' => 'alerte', 'text' => validation_errors()));
-			}
-			if($this->system->cache == 1) $this->cache->remove_group('navigation');
-
-		}
-
 		public function save()
 		{
 			$this->user->check_level($this->template['module'], LEVEL_ADD);
@@ -243,16 +208,21 @@
 				{
 					$this->db->where('id', $id);
 					$this->db->update($this->config->item('table_navigation'), $data);
+					$navigations_id = $id;
 				}
 				else
 				{
 					$data['ordering'] = 999;
 					$this->db->insert($this->config->item('table_navigation'), $data);
+					$navigations_id = $this->db->insert_id();
 				}
 
 				$this->session->set_flashdata('notification', $this->lang->line('notification_save'));
 				if($this->system->cache == 1) $this->cache->remove_group('navigation');
-				redirect($this->session->userdata('redirect_uri'));
+				if(set_value('navigations_redirect') == 1)
+					redirect($this->session->userdata('redirect_uri'));
+				else
+					redirect($this->config->item('admin_folder').'/navigations/edit/'.$navigations_id.set_value('navigations_tabs'));
 			}
 			else
 			{
@@ -261,6 +231,7 @@
 				redirect($this->input->post('redirect_uri'));
 			}
 		}
+		
 		
 		public function createPage($navigations_id = '', $parent_id = '')
 		{

@@ -38,14 +38,14 @@
 		<?php $i = 1;?>
 		<?php foreach ($modules as $module): ?>
 		<tr>
-			<td colspan="5"><strong><?php echo $this->lang->line('text_module')?> : <?php echo ucwords($module['name']);?></strong></td>
+			<td colspan="5"><strong><?php echo $this->lang->line('text_module')?> : <?php echo ucfirst($module['name']);?></strong></td>
 		</tr>
 			<?php if ($i % 2 != 0): $rowClass = 'odd'; else: $rowClass = 'even'; endif;?>
 			<?php if($groups = $this->right->get_rights(array('module' => $module['name']))):?>
 			<?php foreach($groups as $group):?>
 			<tr class="<?php echo $rowClass?>">
 				<td class="center"><?php echo $i?></td>
-				<td><?php echo ucwords($group['title']);?></td>
+				<td><?php echo ucfirst($group['title']);?></td>
 				<td><span class="uppercase"><?php echo $this->template['levels'][$group['level']]?></span></td>
 				<td class="center">
 					<?php if($group['id'] != 1 && $group['id'] != 2):?>

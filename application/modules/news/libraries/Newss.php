@@ -78,7 +78,7 @@ class Newss {
 			$strings = explode(' ', $params['like']);
 			foreach($strings as $string)
 			{
-				$this->obj->db->like(array($this->obj->config->item('table_news').'.title' => $string));
+				$this->obj->db->like(array($this->obj->config->item('table_news_lang').'.title' => $string));
 			}
 
 		}
@@ -88,7 +88,7 @@ class Newss {
 			$strings = explode(' ', $params['or_like']);
 			foreach($strings as $string)
 			{
-				$this->obj->db->or_like(array($this->obj->config->item('table_news').'.title' => $string));
+				$this->obj->db->or_like(array($this->obj->config->item('table_news_lang').'.title' => $string));
 			}
 
 		}
@@ -158,7 +158,7 @@ class Newss {
 			$strings = explode(' ', $params['like']);
 			foreach($strings as $string)
 			{
-				$this->obj->db->like(array($this->obj->config->item('table_news').'.title' => $string));
+				$this->obj->db->like(array($this->obj->config->item('table_news_lang').'.title' => $string));
 			}
 		}
 
@@ -167,7 +167,7 @@ class Newss {
 			$strings = explode(' ', $params['or_like']);
 			foreach($strings as $string)
 			{
-				$this->obj->db->or_like(array($this->obj->config->item('table_news').'.title' => $string));
+				$this->obj->db->or_like(array($this->obj->config->item('table_news_lang').'.title' => $string));
 			}
 
 		}

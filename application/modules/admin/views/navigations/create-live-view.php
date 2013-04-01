@@ -14,7 +14,7 @@
 		<?php $post = $this->session->flashdata('post');?>
 		<fieldset>
 			<label for="title"><?php echo $this->lang->line('label_title');?></label>
-			<input name="title" id="title" type="text"  value="<?php if(isset($post['title'])) echo $post['title'];else echo html_entity_decode($navigation['title']);?>" class="input_text" autocomplete="off" maxlength="64"/>
+			<input name="title" id="title" type="text"  value="<?php if(isset($post['title'])) echo $post['title'];else echo $navigation['title'];?>" class="input_text" autocomplete="off" maxlength="64"/>
 			<span class="required"><?php echo $this->lang->line('text_required');?></span>
 			<label for="uri"><?php echo $this->lang->line('label_uri');?></label>
 			<input name="uri" id="uri" type="text"  value="<?php if(isset($post['uri'])) echo $post['uri'];else echo $navigation['uri'];?>" class="input_text" maxlength="128"/>
@@ -23,7 +23,7 @@
 				<?php
 				if(isset($pages) && $pages):
 				foreach ($pages as $page):?>
-				<option value="<?php echo $page['uri']?>"><?php echo ($page['level'] > 0) ? "|".str_repeat("__", $page['level']): "";?> <?php echo (strlen(html_entity_decode($page['title'])) > 40? substr(html_entity_decode($page['title']), 0,40) . '...': html_entity_decode($page['title']));?></option>
+				<option value="<?php echo $page['uri']?>"><?php echo ($page['level'] > 0) ? "|".str_repeat("__", $page['level']): "";?> <?php echo character_limiter($page['title'], 40);?></option>
 				<?php endforeach;endif;?>
 			</select>
 			<label for="parent_id"><?php echo $this->lang->line('label_parent');?></label>
@@ -43,7 +43,7 @@
 				$follow = null;
 			}
 			?>
-			<option value="<?php echo $parent['id']?>" <?php echo ($navigation['parent_id'] == $parent['id'] || (isset($parent_id) && ($parent_id == $parent['id'])))?'selected="selected"' : '';?>><?php echo ($parent['level'] > 0) ? "|".str_repeat("__", $parent['level']) : '';?> <?php echo html_entity_decode($parent['title']). $follow ?></option>
+			<option value="<?php echo $parent['id']?>" <?php echo ($navigation['parent_id'] == $parent['id'] || (isset($parent_id) && ($parent_id == $parent['id'])))?'selected="selected"' : '';?>><?php echo ($parent['level'] > 0) ? "|".str_repeat("__", $parent['level']) : '';?> <?php echo character_limiter($parent['title'], 40). $follow ?></option>
 			<?php endforeach;?>
 			</select>
 			<?php if(isset($modules) && $modules):?>
@@ -51,7 +51,7 @@
 			<select id="module" name="module" class="input_select">
 				<option value=""></option>
 				<?php foreach($modules as $module):?>
-				<option value="<?php echo $module['name'];?>"<?php if($module['name'] == $navigation['module']):?> selected="selected"<?php endif;?>><?php echo ucwords($module['name']);?></option>
+				<option value="<?php echo $module['name'];?>"<?php if($module['name'] == $navigation['module']):?> selected="selected"<?php endif;?>><?php echo ucfirst($module['name']);?></option>
 				<?php endforeach;?>
 			</select>
 			<?php endif;?>

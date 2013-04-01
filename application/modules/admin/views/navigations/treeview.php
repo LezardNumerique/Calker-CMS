@@ -31,16 +31,16 @@
 				<td>
 					<?php if ($navigation['level'] == 0) :?>
 					<span class="lv0_img"><img src="<?php echo site_url(APPPATH.'views/'.$this->config->item('theme_admin').'/img/icons/lv0.gif')?>" alt=""/></span>
-					<span class="lv0"><?php echo html_entity_decode($navigation['title']);?></span>
+					<span class="lv0"><?php echo $navigation['title'];?></span>
 					<?php elseif ($navigation['level'] == 1) :?>
 					<span class="lv1_img"><img src="<?php echo site_url(APPPATH.'views/'.$this->config->item('theme_admin').'/img/icons/lv1.gif')?>" alt=""/></span>
-					<span class="lv1"><?php echo html_entity_decode($navigation['title']);?></span>
+					<span class="lv1"><?php echo $navigation['title'];?></span>
 					<?php elseif ($navigation['level'] == 2) :?>
 					<span class="lv2_img"><img src="<?php echo site_url(APPPATH.'views/'.$this->config->item('theme_admin').'/img/icons/lv2.gif')?>" alt=""/></span>
-					<span class="lv2"><?php echo html_entity_decode($navigation['title']);?></span>
+					<span class="lv2"><?php echo $navigation['title'];?></span>
 					<?php elseif ($navigation['level'] == 3) :?>
 					<span class="lv3_img"><img src="<?php echo site_url(APPPATH.'views/'.$this->config->item('theme_admin').'/img/icons/lv3.gif')?>" alt=""/></span>
-					<span class="lv3"><?php echo html_entity_decode($navigation['title']);?></span>
+					<span class="lv3"><?php echo $navigation['title'];?></span>
 					<?php endif;?>
 				</td>
 				<td><?php echo $navigation['uri']?></td>

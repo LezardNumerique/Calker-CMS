@@ -1,5 +1,4 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
-
 class Translation {
 
 	function Translation() {
@@ -26,7 +25,7 @@ class Translation {
 			$html = '<?php'."\n";
 			foreach($data as $key => $value)
 			{
-				$html .= '$lang[\''.$key.'\'] = "'.$value.'";'."\n";
+				$html .= '$lang[\''.$key.'\'] = "'.htmlspecialchars($value).'";'."\n";
 			}
 			$html .= '?>';
 			fputs($file, $html);
@@ -34,29 +33,4 @@ class Translation {
 		}
 
 	}
-
-	/*
-	public function save__($module = 'admin', $data = '')
-	{
-		$file = './'.APPPATH.'modules/'.$module.'/language/'.$this->obj->user->lang.'/index_lang.php';
-
-		$html = '<?php'."\n";
-
-		if($data)
-		{
-			foreach($data as $key => $value)
-			{
-				echo $key.'-'.$value.'<br />';
-			}
-		}
-
-		$html = '?>'."\n";
-
-		$file = fopen($file, 'a');
-		fputs($file, $html);
-		fclose($file);
-
-		exit;
-	}
-	* */
 }
