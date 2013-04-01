@@ -1,6 +1,7 @@
 # Folders #
 ######################
 cache/
+application/logs/
 
 
 # Logs and databases #
