@@ -16,5 +16,5 @@ ehthumbs.db
 Thumbs.db
 application/config/database.php
 
-
+*.gz
 *.log
