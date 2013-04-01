@@ -62,7 +62,7 @@ class install_Model extends CI_Model {
 $active_group = \'default\';
 $active_record = TRUE;
 
-if($_SERVER[\'SERVER_NAME\'] == \'www.domaine.com\' || $_SERVER[\'SERVER_NAME\'] == \'domaine.com\')
+if($_SERVER[\'SERVER_NAME\'] == \'localhost\' || $_SERVER[\'SERVER_NAME\'] == \'127.0.0.1\')
 {
 	$db[\'default\'][\'hostname\'] = \''.$database_hostname.'\';
 	$db[\'default\'][\'username\'] = \''.$database_username.'\';
