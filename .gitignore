@@ -1,8 +1,9 @@
 # Folders+Files #
 ######################
-cache/
 application/logs/
 application/config/database.php
+cache/
+medias/
 
 # Logs and databases #
 ######################
