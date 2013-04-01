@@ -155,30 +155,19 @@
 		{
 			$this->obj->load->helper('file');
 			$dir = './'.$this->obj->config->item('cache_folder');
-			if ($handle = opendir($dir))
-			{
-				delete_files($dir, TRUE, $level = 0)	;
-			}
-
-			//Css
+			if ($handle = opendir($dir))			
+				delete_files($dir, TRUE, $level = 0);
+			
 			$this->obj->load->helper('file');
 
-			//Delete image cache
+			//---- Delete image cache
 			$dir = APPPATH.'views/'.$this->obj->config->item('theme_admin').'/css/.'.$this->obj->config->item('cache_folder');
 
-			$handle = opendir($dir);
-
-			if ($handle)
-			{
-				while ( false !== ($css_file = readdir($handle)) )
-				{
-					if (($css_file != '.') && ($css_file != '..'))
-					{
+			//---- Delete Css cache
+			if ($handle = opendir($dir))			
+				while (false !== ($css_file = readdir($handle)))				
+					if (($css_file != '.') && ($css_file != '..'))					
 						if(is_file($dir.'/'.$css_file) && is_readable($dir.'/'.$css_file)) unlink($dir.'/'.$css_file);
-					}
-				}
-			}
-
 		}
 
 		public function utf8()
