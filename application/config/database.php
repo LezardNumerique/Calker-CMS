@@ -44,9 +44,9 @@ $active_record = TRUE;
 if($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '78.238.31.134')
 {
 	$db['default']['hostname'] = 'localhost';
-	$db['default']['username'] = 'root';
-	$db['default']['password'] = 'wpwn2wak';
-	$db['default']['database'] = 'calker';
+	$db['default']['username'] = 'username';
+	$db['default']['password'] = 'password';
+	$db['default']['database'] = 'database';
 }
 else {
 	$db['default']['hostname'] = 'localhost';
