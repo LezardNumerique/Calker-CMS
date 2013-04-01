@@ -69,7 +69,7 @@
  * as this file.
  *
  */
-	if($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '78.238.31.134') $system_path = '../system-2.1.3';
+	if($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.0.1') $system_path = '../system-2.1.3';
 	else $system_path = 'system-2.1.3';
 
 /*
@@ -163,7 +163,7 @@
 	$system_path = rtrim($system_path, '/').'/';
 
 	// Is the system path correct?
-	if ( ! is_dir($system_path))
+	if (!is_dir($system_path))
 	{
 		exit('Your system folder path does not appear to be set correctly. Please open the following file and correct this: '.pathinfo(__FILE__, PATHINFO_BASENAME));
 	}
