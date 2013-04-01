@@ -44,7 +44,7 @@ $active_record = TRUE;
 if($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.0.1')
 {
 	$db['default']['hostname'] = 'localhost';
-	$db['default']['username'] = 'username';
+	$db['default']['username'] = 'g';
 	$db['default']['password'] = 'password';
 	$db['default']['database'] = 'database';
 }
