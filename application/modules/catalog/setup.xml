@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<module>
+	<name>catalog</name>
+	<date>10/01/2012</date>
+	<author>A.Polounovsky</author>
+	<email>contact@lezard-numerique.net</email>
+	<url>http://www.lezard-numerique.net</url>
+	<copyright>Copyright</copyright>
+	<version>1.0.0</version>
+	<description>Catalog module</description>
+</module>
+

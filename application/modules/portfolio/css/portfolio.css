@@ -1,0 +1,19 @@
+u.l#listing_portfolio {
+	float:left;
+}
+ul.listing_portfolio li {
+	float:left;	
+	position:relative;    
+}
+ul.listing_portfolio li.even {
+	margin-right:0;
+}
+ul.listing_portfolio li div.img:hover {
+	opacity:0.8;
+}
+ul.listing_portfolio li h2 {
+	margin:10px 0 0 0;
+}
+ul.listing_portfolio li div.body {
+	margin:10px 0 0 0;
+}

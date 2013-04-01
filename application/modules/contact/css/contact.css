@@ -1,0 +1,57 @@
+#contact {
+	position:relative;
+}
+#form_contact fieldset {
+	padding:10px 0;
+}
+#form_contact label {
+	clear:both;
+	float:left;
+	width:200px;
+	margin:5px 0;
+	padding:5px 0;
+}
+#form_contact .input_text {
+	float:left;
+	width:200px;
+	margin:5px 0;
+	padding:5px;
+	background:transparent;
+	font:13px Arial, Verdana, Sans-Serif;
+}
+#form_contact .input_textarea {
+	float:left;
+	width:520px;
+	height:150px;
+	margin:5px 0;
+	padding:5px;
+	background:transparent;
+	font:13px Arial, Verdana, Sans-Serif;
+}
+#form_contact .input_submit {
+	float:right;
+	margin:0 0 10px 0;
+	padding:5px 10px;
+	cursor:pointer;
+	font:13px Arial, Verdana, Sans-Serif;
+}
+#form_contact span.required {
+	float:left;
+	margin:10px 0 0 10px;
+}
+#form_contact span.captcha {
+	float:left;
+	color:#a02003;
+	margin:10px 0 0 10px;
+}
+#contact h2, #contact h1 {
+	margin:10px 0;
+}
+#contact .adress {
+	font-size:15px;
+}
+#contact #qrcode {
+	position:absolute;
+	top:60px;
+	right:0;
+}

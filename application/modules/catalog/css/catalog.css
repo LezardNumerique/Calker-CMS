@@ -1,0 +1,137 @@
+/*---------------------------------- CATEGORIES ----------------------------------*/
+#categories_right {
+	margin:0 0 20px 0;
+}
+#categories_right .pagersorter {
+	height:30px;
+	line-height:30px;
+	border-top:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	clear:both;
+	width:100%;
+}
+#categories_right .pager, #categories_right .pager_left {
+	float:left;
+}
+#categories_right .sort, #categories_right .pager_right {
+	float:right;
+}
+#categories_right .pager_right a, #categories_right .pager_right strong {
+	padding:3px 10px;
+	border:1px solid #203a7f;
+	text-decoration:none;
+}
+#categories_right select {
+	border:1px solid #203a7f;
+	background:#fff;
+	padding:3px;
+}
+.listing_products {
+	float:left;
+	clear:both;
+	margin:10px 0;
+}
+.listing_products li {
+	float:left;
+	width:171px;
+	height:180px;
+	padding:0;
+	margin:0 10px 10px 0;
+}
+.listing_products li.last {
+	margin-right:0;
+}
+.listing_products .img {
+	border:1px solid #203a7f;
+	padding:10px;
+}
+.listing_products .img:hover {
+	opacity:0.6;
+}
+.listing_products img {
+	margin:0 auto;
+	display:block;
+}
+.listing_products li span {
+	display:block;
+}
+.listing_products h2 {
+	margin:5px 0 0 0;
+	text-transform:uppercase;
+	font-size: 12px;
+}
+.listing_products h2 a{
+	text-decoration:none;
+}
+
+/*---------------------------------- PRODUCTS ----------------------------------*/
+
+#products .left {
+	float:left;
+	width:350px;
+}
+#products #img_big {
+	width:350px;
+}
+#products #img_big img{
+	border:1px solid #203a7f;
+	padding:10px;
+}
+#products #img_thumbs {
+	float:left;
+	margin-top:5px;
+	width:372px;
+}
+#products #img_thumbs li{
+	float:left;
+	margin:0 10px 5px 0;
+}
+#products #img_thumbs li.last {
+	margin-right:0;
+}
+#products #img_thumbs li img {
+	border:1px solid #ccc;
+	padding:5px;
+}
+#products #img_thumbs li img:hover {
+	opacity:0.6;
+}
+#products .right {
+	float:right;
+	width:500px;
+}
+#products h1 {
+	color:#203a7f;
+}
+#products .body {
+	text-align:justify;
+}
+#products .right .price {
+	font-size:20px;
+}
+#products strike {
+	font-size:15px;
+}
+#products .btn_actions a {
+	color:#203a7f;
+}
+#products h3 {
+	color:#203a7f;
+	font-weight:normal;
+	font-size: 20px;
+	border-bottom:1px solid #203a7f;
+	padding:5px 0;
+	margin:0 0 10px 0;
+}
+div.attributes {
+	margin:10px 0;
+}
+span.attributes_colors {
+	float:left;
+	width:20px;
+	height:20px;
+	display:block;
+	border:1px solid #000;
+	text-indent:-99999px;
+	margin:0 10px 0 0;
+}

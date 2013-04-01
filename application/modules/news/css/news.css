@@ -1,0 +1,41 @@
+#new {
+	position:relative;
+}
+ul.listing_news, ul.listing_news li {
+	float:left;
+}
+ul.listing_news li {
+	clear:both;
+	margin:0 0 20px 0;
+	padding:0 0;
+	position:relative;
+}
+ul.listing_news li div.img, #new div.img {
+	float:left;
+}
+ul.listing_news li div.body, #new div.body {
+	float:right;
+	text-align:justify;
+}
+ul.listing_news li h3, #new h2{
+	margin:0 0 10px 0;
+	font-style:italic;
+	font-weight:normal;
+}
+ul.listing_news li p {
+	margin:0 0 10px 0;
+	text-align:justify;
+}
+p.more {
+	position:absolute;
+	bottom:0;
+	right:0;
+}
+p.return {
+	float:right;
+}
+ul.listing_news li ul li {
+	clear:none;
+	float:left;
+	width:auto;
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<module>
+	<name>pages</name>
+	<date>09/12/2011</date>
+	<author>A.Polounovsky</author>
+	<email>contact@lezard-numerique.net</email>
+	<url>http://www.lezard-numerique.net</url>
+	<copyright>Copyright</copyright>
+	<version>1.0.0</version>
+	<description>Pages core module</description>
+</module>
+

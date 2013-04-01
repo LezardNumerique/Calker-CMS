@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<config version="1.0" type="template">
+		<name>Version 2</name>
+		<date>30/08/2011</date>
+		<author>A.Polounovsky</author>
+		<email>contact@lezard-numerique.net</email>
+		<url>http://www.lezard-numerique.net</url>
+		<copyright>GNU/GPL License</copyright>
+		<version>2.0.0</version>
+		<description>Template 2 colonnes</description>
+	</config>

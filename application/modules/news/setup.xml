@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<module>
+	<name>news</name>
+	<date>02/09/2012</date>
+	<author>A.Polounovsky</author>
+	<email>contact@lezard-numerique.net</email>
+	<url>http://www.lezard-numerique.net</url>
+	<copyright>Copyright</copyright>
+	<version>1.0.0</version>
+	<description>News module</description>
+</module>
+

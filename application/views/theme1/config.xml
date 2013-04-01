@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config version="1.0" type="template">
+	<name>Theme 1</name>
+    <date>09/10/2012</date>
+    <author>A.Polounovsky</author>
+    <email>contact@lezard-numerique.net</email>
+    <url>http://www.lezard-numerique.net</url>
+    <copyright>GNU/GPL License</copyright>
+    <version>1.0.0</version>
+    <description>Template 1 colonne</description>
+	<areas>
+		<area>
+			<id>accueil</id>
+		</area>
+		<area>
+			<id>centre</id>
+		</area>
+		<area>
+			<id>gauche</id>
+		</area>
+		<area>
+			<id>droite</id>
+		</area>
+	</areas>
+	<size>
+		<main>
+			<value>960</value>
+		</main>
+		<padding>
+			<value>20</value>
+		</padding>
+	</size>
+	<css>
+		<stylesheet>
+			<color>Brown</color>
+			<hexa>#27271F</hexa>
+			<file>style.css</file>
+		</stylesheet>
+	</css>
+</config>
