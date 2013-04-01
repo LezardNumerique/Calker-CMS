@@ -1,7 +1,6 @@
-# Folders+Files #
+# Folders #
 ######################
 application/logs/
-+application/config/database.php
 cache/
 medias/
 
