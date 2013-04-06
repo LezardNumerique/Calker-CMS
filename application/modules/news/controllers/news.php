@@ -29,56 +29,47 @@ class News extends CI_Controller
 		$where = array($this->config->item('table_news').'.active' => 1, 'lang' => $this->user->lang, 'lang' => $this->user->lang);
 		if($this->user->liveView) $where = array();
 
-		if($news = $this->news->list_news(array('where' => $where, 'select' => '*', 'start' => $start, 'limit' => $per_page)))
-		{
-			$total_news = $this->news->total_list_news(array('where' => $where));
+		
+		$news = $this->news->list_news(array('where' => $where, 'select' => '*', 'start' => $start, 'limit' => $per_page));
+		$total_news = $this->news->total_list_news(array('where' => $where));
 
-			$this->template['images'] = array();
-			if($medias = $this->medias->list_medias(array('where' => array('module' => $this->template['module']))))
+		$this->template['images'] = array();
+		if($medias = $this->medias->list_medias(array('where' => array('module' => $this->template['module']))))
+		{
+			foreach($medias as $media)
 			{
-				foreach($medias as $media)
-				{
-					$this->template['images'][$media['src_id']] = $media;
-				}
+				$this->template['images'][$media['src_id']] = $media;
 			}
+		}
 			
-			$images_sizes = $this->medias->get_medias_types_sizes('listing-news');
-			$images_sizes = array(
-				'width' 	=> $images_sizes['width'],
-				'height' 	=> $images_sizes['height'] 
-			);
-			$this->template['images_sizes'] = $images_sizes;
+		$images_sizes = $this->medias->get_medias_types_sizes('listing-news');
+		$images_sizes = array(
+			'width' 	=> $images_sizes['width'],
+			'height' 	=> $images_sizes['height'] 
+		);
+		$this->template['images_sizes'] = $images_sizes;
 
-			$this->load->library('pagination');
+		$this->load->library('pagination');
 
-			$config['num_links'] = $this->system->num_links;
-			$config['uri_segment'] = count($this->uri->segments);
-			$config['first_link'] = $this->lang->line('text_begin');
-			$config['last_link'] = $this->lang->line('text_end');
-			$config['base_url'] = site_url($this->language->get_uri_language('/').$this->template['module'].'/');
-			$config['total_rows'] = $total_news;
-			$config['per_page'] = $per_page;
+		$config['num_links'] = $this->system->num_links;
+		$config['uri_segment'] = count($this->uri->segments);
+		$config['first_link'] = $this->lang->line('text_begin');
+		$config['last_link'] = $this->lang->line('text_end');
+		$config['base_url'] = site_url($this->language->get_uri_language('/').$this->template['module'].'/');
+		$config['total_rows'] = $total_news;
+		$config['per_page'] = $per_page;
+		
+		$this->pagination->initialize($config);
 
-			$this->pagination->initialize($config);
+		$this->template['pager'] = $this->pagination->create_links();
+		$this->template['total_news'] = $total_news;
+		$this->template['start'] = $start;
 
-			$this->template['pager'] = $this->pagination->create_links();
-			$this->template['total_news'] = $total_news;
-			$this->template['start'] = $start;
+		$this->template['news'] = $news;		
 
-			$this->template['news'] = $news;
-			$view = 'index';
-		}
-		else
-		{
-			$this->output->set_header('HTTP/1.0 404 Not Found');
-			$this->template['title'] = $this->lang->line('title_new_categorie_not_found');
-			$view = '404';
-		}
-
-		$this->javascripts->add(array('jquery', 'ui', 'filestyle', 'colorbox', 'swfobject', 'slider', 'sitelib'));
+		$this->javascripts->add(array('jquery', 'sitelib'));
 		$this->css->add($this->template['module']);
-		$this->layout->load($this->template, $this->system->theme,  $view);
-
+		$this->layout->load($this->template, $this->system->theme,  'index');
 
 		$this->session->set_userdata('redirect_uri_front', $this->uri->uri_string());
 	}

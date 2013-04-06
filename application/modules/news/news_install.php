@@ -40,6 +40,6 @@ $this->db->query("CREATE TABLE IF NOT EXISTS ".$this->db->dbprefix('news_lang').
   `meta_title` varchar(128) DEFAULT NULL,
   `meta_keywords` varchar(255) DEFAULT NULL,
   `meta_description` varchar(255) DEFAULT NULL,
-  UNIQUE KEY `news_id` (`news_id`,`lang`),
-  KEY `uri` (`uri`)
+  UNIQUE KEY `uri` (`uri`,`lang`),
+  KEY `news_id` (`news_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;");

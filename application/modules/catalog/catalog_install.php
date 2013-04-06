@@ -62,50 +62,68 @@ $this->db->query("CREATE TABLE IF NOT EXISTS ".$this->db->dbprefix('categories')
   `parent_id` int(11) DEFAULT '0',
   `active` tinyint(1) DEFAULT '1',
   `ordering` int(3) DEFAULT '0',
-  `title` varchar(64) DEFAULT NULL,
-  `body` text,
-  `meta_title` varchar(64) DEFAULT NULL,
-  `meta_keywords` varchar(255) DEFAULT NULL,
-  `meta_description` text,
-  `uri` varchar(64) NOT NULL,
-  `lang` char(5) NOT NULL DEFAULT 'fr',
-  `date_added` int(11) DEFAULT NULL,
+  `date_added` int(11) NOT NULL,
   `date_modified` int(11) DEFAULT NULL,
-  `is_home` tinyint(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `active` (`active`),
   KEY `parent_id` (`parent_id`),
-  KEY `title` (`title`),
-  KEY `ordering` (`ordering`),
-  KEY `uri` (`uri`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;");
-$this->db->query("INSERT INTO ".$this->db->dbprefix('categories')." (`id`, `parent_id`, `active`, `ordering`, `title`, `body`, `meta_title`, `meta_keywords`, `meta_description`, `uri`, `lang`, `date_added`, `date_modified`, `is_home`) VALUES
-(1, 0, 1, 0, 'Accueil', NULL, NULL, NULL, NULL, 'accueil', 'fr', NULL, NULL, 0);");
+  KEY `ordering` (`ordering`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+
+$this->db->query("
+INSERT INTO ".$this->db->dbprefix('categories')." (`id` ,`parent_id` ,`active` ,`ordering` ,`date_added` ,`date_modified`) VALUES
+('1', '0', '1', '0', ".mktime()." , NULL);");
+
+//------ TABLE CATEGORIES LANG
+$this->db->query("DROP TABLE IF EXISTS ".$this->db->dbprefix('categories_lang'));
+$this->db->query("CREATE TABLE IF NOT EXISTS ".$this->db->dbprefix('categories_lang')." (
+  `categories_id` int(11) NOT NULL,
+  `lang` char(5) NOT NULL DEFAULT 'fr',
+  `title` varchar(64) NOT NULL,
+  `body` text,
+  `meta_title` varchar(64) DEFAULT NULL,
+  `meta_keywords` varchar(255) DEFAULT NULL,
+  `meta_description` varchar(255) DEFAULT NULL,
+  `uri` varchar(64) NOT NULL,
+  UNIQUE KEY `uri` (`uri`,`lang`),
+  KEY `categories_id` (`categories_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;");
+$this->db->query("
+INSERT INTO ".$this->db->dbprefix('categories_lang')." (`categories_id`, `lang`, `title`, `body`, `meta_title`, `meta_keywords`, `meta_description`, `uri`) VALUES
+(1, 'fr', 'Catalogue', NULL, NULL, NULL, NULL, 'index'),
+(1, 'en', 'Catalog', NULL, NULL, NULL, NULL, 'index');");
 
 //------ TABLE PRODUCTS
 $this->db->query("DROP TABLE IF EXISTS ".$this->db->dbprefix('products'));
 $this->db->query("CREATE TABLE IF NOT EXISTS ".$this->db->dbprefix('products')." (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `active` tinyint(1) DEFAULT '1',
-  `categories_id_default` int(11) NOT NULL DEFAULT '1',
-  `title` varchar(128) DEFAULT NULL,
-  `reference` varchar(32) DEFAULT NULL,
-  `uri` varchar(128) DEFAULT NULL,
+  `categories_id_default` int(11) NOT NULL DEFAULT '1',  
+  `reference` varchar(32) DEFAULT NULL,  
   `price` decimal(13,4) DEFAULT NULL,
   `price_shopping` decimal(13,4) DEFAULT NULL,
-  `tva` decimal(3,1) DEFAULT NULL,
+  `tva` decimal(3,1) DEFAULT NULL,  
+  `date_added` int(11) NOT NULL,
+  `date_modified` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`), 
+  KEY `active` (`active`),  
+  KEY `categories_id_default` (`categories_id_default`),
+  KEY `reference` (`reference`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+
+//------ TABLE PRODUCTS LANG
+$this->db->query("DROP TABLE IF EXISTS ".$this->db->dbprefix('products_lang'));
+$this->db->query("CREATE TABLE IF NOT EXISTS ".$this->db->dbprefix('products_lang')." (
+  `products_id` int(11) unsigned NOT NULL AUTO_INCREMENT,  
+  `title` varchar(128) DEFAULT NULL,  
+  `uri` varchar(128) DEFAULT NULL, 
   `lang` char(5) NOT NULL DEFAULT 'fr',
   `meta_title` varchar(128) DEFAULT NULL,
   `meta_keywords` varchar(255) DEFAULT '',
   `meta_description` text,
   `body` text,
-  `date_added` int(11) NOT NULL,
-  `date_modified` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `uri` (`uri`),
-  KEY `active` (`active`),
-  KEY `title` (`title`),
-  KEY `categories_id_default` (`categories_id_default`)
+  UNIQUE KEY `uri` (`uri`,`lang`),
+  KEY `products_id` (`products_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
 //------ TABLE PRODUCTS ATTRIBUTES VALUES

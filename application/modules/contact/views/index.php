@@ -85,33 +85,33 @@
 			<?php if($this->settings['active_field_firstname'] == 1):?>
 			<div>
 				<label for="contact_firstname"><?php echo $this->lang->line('label_firstname');?></label>
-				<input type="text" name="contact_firstname" id="contact_firstname" value="<?php echo $contact_firstname;?>" class="input_text" maxlength="64"/>
+				<input type="text" name="contact_firstname" id="contact_firstname" value="<?php echo set_value('contact_firstname');?>" class="input_text" maxlength="64"/>
 				<span class="required"><?php echo $this->lang->line('text_required');?></span>
 			</div>
 			<?php endif;?>
 			<?php if($this->settings['active_field_lastname'] == 1):?>
 			<div>
 				<label for="contact_lastname"><?php echo $this->lang->line('label_lastname');?></label>
-				<input type="text" name="contact_lastname" id="contact_lastname" value="<?php echo $contact_lastname;?>" class="input_text" maxlength="64"/>
+				<input type="text" name="contact_lastname" id="contact_lastname" value="<?php echo set_value('contact_lastname');?>" class="input_text" maxlength="64"/>
 				<span class="required"><?php echo $this->lang->line('text_required');?></span>
 			</div>
 			<?php endif;?>
 			<div>
 				<label for="contact_email"><?php echo $this->lang->line('label_email');?></label>
-				<input type="text" name="contact_email" id="contact_email" value="<?php echo $contact_email;?>" class="input_text" maxlength="128"/>
+				<input type="text" name="contact_email" id="contact_email" value="<?php echo set_value('contact_email');?>" class="input_text" maxlength="128"/>
 				<span class="required"><?php echo $this->lang->line('text_required');?></span>
 			</div>
 			<?php if($this->settings['active_field_phone'] == 1):?>
 			<div>
 				<label for="contact_phone"><?php echo $this->lang->line('label_phone');?></label>
-				<input type="text" name="contact_phone" id="contact_phone" value="<?php echo $contact_phone;?>" class="input_text" maxlength="16"/>
+				<input type="text" name="contact_phone" id="contact_phone" value="<?php echo set_value('contact_phone');?>" class="input_text" maxlength="16"/>
 				<span class="required"><?php echo $this->lang->line('text_required');?></span>
 			</div>
 			<?php endif;?>
 			<?php if($this->settings['active_field_message'] == 1):?>
 			<div>
 				<label for="contact_message"><?php echo $this->lang->line('label_message');?></label>
-				<textarea name="contact_message" id="contact_message" rows="5" cols="40" class="input_textarea" maxlength="255"><?php echo $contact_message;?></textarea>
+				<textarea name="contact_message" id="contact_message" rows="5" cols="40" class="input_textarea" maxlength="255"><?php echo set_value('contact_message');?></textarea>
 				<span class="required"><?php echo $this->lang->line('text_required');?></span>
 			</div>
 			<?php endif;?>

@@ -49,19 +49,19 @@ $(function() {
 			</td>
 			<td class="center">
 				<?php if ($module['active'] == 1 && $module['ordering'] >= 100): ?>
-				<a href="<?php echo site_url($this->config->item('admin_folder').'/module/desactivate/'. $module['name'])?>" class="tooltip" title="<?php echo $this->lang->line('btn_desactivate');?>"><img src="<?php echo site_url(APPPATH.'views/'.$this->config->item('theme_admin').'/img/icons/status_green.png');?>" alt="<?php echo $this->lang->line('btn_desactivate');?>" width="16px" height="16px"/></a>
+				<a href="<?php echo site_url($this->config->item('admin_folder').'/module/desactivate/'.$module['name'])?>" class="tooltip" title="<?php echo $this->lang->line('btn_desactivate');?>"><img src="<?php echo site_url(APPPATH.'views/'.$this->config->item('theme_admin').'/img/icons/status_green.png');?>" alt="<?php echo $this->lang->line('btn_desactivate');?>" width="16px" height="16px"/></a>
 				<?php elseif ($module['active'] == 0) : ?>
-				<a href="<?php echo site_url($this->config->item('admin_folder').'/module/activate/'. $module['name'])?>" class="tooltip" title="<?php echo $this->lang->line('btn_activate');?>"><img src="<?php echo site_url(APPPATH.'views/'.$this->config->item('theme_admin').'/img/icons/status_red.png');?>" alt="<?php echo $this->lang->line('btn_activate');?>" width="16px" height="16px"/></a>
+				<a href="<?php echo site_url($this->config->item('admin_folder').'/module/activate/'.$module['name'])?>" class="tooltip" title="<?php echo $this->lang->line('btn_activate');?>"><img src="<?php echo site_url(APPPATH.'views/'.$this->config->item('theme_admin').'/img/icons/status_red.png');?>" alt="<?php echo $this->lang->line('btn_activate');?>" width="16px" height="16px"/></a>
 				<?php endif;?>
 			</td>
 			<td class="center">
 				<?php if ($module['active'] == 1  && $module['ordering'] >= 100): ?>
-				<a href="<?php echo site_url($this->config->item('admin_folder').'/module/uninstall/'. $module['name'])?>" title="<?php echo $this->lang->line('btn_uninstall_module');?>" class="tooltip" onclick="javascript:return confirmDelete();"><img src="<?php echo site_url(APPPATH.'views/'.$this->config->item('theme_admin').'/img/icons/uninstall.gif');?>" alt="<?php echo $this->lang->line('btn_uninstall_module');?>" width="16px" height="16px"/></a>
+				<a href="<?php echo site_url($this->config->item('admin_folder').'/module/uninstall/'.$module['name'])?>" title="<?php echo $this->lang->line('btn_uninstall_module');?>" class="tooltip" onclick="javascript:return confirmDelete();"><img src="<?php echo site_url(APPPATH.'views/'.$this->config->item('theme_admin').'/img/icons/uninstall.png');?>" alt="<?php echo $this->lang->line('btn_uninstall_module');?>" width="16px" height="16px"/></a>
 				<?php elseif ($module['active'] == -1): ?>
-				<a href="<?php echo site_url($this->config->item('admin_folder').'/module/install/'. $module['name'])?>" title="<?php echo $this->lang->line('btn_install_module');?>" class="tooltip"><img src="<?php echo site_url(APPPATH.'views/'.$this->config->item('theme_admin').'/img/icons/install.gif');?>" alt="<?php echo $this->lang->line('btn_install_module');?>" width="16px" height="16px"/></a>
+				<a href="<?php echo site_url($this->config->item('admin_folder').'/module/install/'.$module['name'])?>" title="<?php echo $this->lang->line('btn_install_module');?>" class="tooltip"><img src="<?php echo site_url(APPPATH.'views/'.$this->config->item('theme_admin').'/img/icons/install.png');?>" alt="<?php echo $this->lang->line('btn_install_module');?>" width="16px" height="16px"/></a>
 				<?php else: ?>
 				<?php if (isset($module['nversion']) && $module['nversion'] > $module['version']) : ?>
-				<a href="<?php echo site_url($this->config->item('admin_folder').'/'.$module.'/update/'. $module['name'])?>"><span style='color: #FF0000'><?php echo $this->lang->line('btn_update');?></span></a>
+				<a href="<?php echo site_url($this->config->item('admin_folder').'/module/update/'.$module['name'])?>"><span style="color:#FF0000;"><?php echo $this->lang->line('btn_update');?></span></a>
 				<?php endif;?>
 				<?php endif;?>
 			</td>

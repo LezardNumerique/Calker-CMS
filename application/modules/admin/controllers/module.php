@@ -159,15 +159,10 @@
 			{
 				if($this->system->cache == 1) $this->cache->remove_group('modules');
 				if($this->system->cache == 1) $this->cache->remove_group('system');
-				include( APPPATH.'modules/'.$module.'/' . $module .'_update.php' );
-				$this->session->set_flashdata('notification', __("Aucun changement", $this->template['module']));
-				redirect($this->config->item('admin_folder').'/module');
-			}
-			else
-			{
-				$this->session->set_flashdata('notification', __("Aucune mise &agrave; jour disponible", $this->template['module']));
-				redirect($this->config->item('admin_folder').'/module');
-			}
+				include( APPPATH.'modules/'.$module.'/' . $module .'_update.php' );				
+			}			
+			$this->session->set_flashdata('notification', $this->lang->line('notification_module_update'));
+			redirect($this->config->item('admin_folder').'/module');
 
 		}
 

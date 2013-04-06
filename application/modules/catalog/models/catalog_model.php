@@ -68,7 +68,7 @@ class catalog_Model extends CI_Model {
 			else
 			{
 				//Delete
-				if($media = $this->medias->get_medias(array('src_id' => $last_id, 'module' => 'categories_products')))
+				if($media = $this->medias->get_medias(array('src_id' => $last_id, 'module' => 'catalog_categories')))
 				{
 					$this->medias->delete_medias($media['id']);
 				}

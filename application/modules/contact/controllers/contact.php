@@ -10,15 +10,13 @@
 			$this->load->model('contact_model', 'model');
 			$this->settings = isset($this->system->contact_settings) ? unserialize($this->system->contact_settings) : array();
 
-			if($this->system->modules[$this->template['module']]['active'] != 1)
+			if(!isset($this->system->modules[$this->template['module']]['active']))
 				redirect('pages/unauthorized/'.$this->template['module'].'/1');
 
 		}
 
 		public function index()
 		{
-			$this->load->library('sanitation');
-
 			if($this->settings['active_map'] == 1) $this->plugin->add_action('header', array(&$this, '_write_header'));
 
 			$this->template['title'] = $this->lang->line('title_contact');
@@ -46,7 +44,7 @@
 				$fields[] = array(
 					'field'   => 	'contact_firstname',
 					'label'   => 	$this->lang->line('validation_firstname'),
-					'rules'   => 	'trim|required|max_length[64]|xss_clean'
+					'rules'   => 	'trim|required|max_length[64]||htmlspecialchars|xss_clean'
 				);
 			}
 
@@ -55,14 +53,14 @@
 				$fields[] = array(
 					'field'   => 	'contact_lastname',
 					'label'   => 	$this->lang->line('validation_lastname'),
-					'rules'   => 	'trim|required|max_length[64]|xss_clean'
+					'rules'   => 	'trim|required|max_length[64]||htmlspecialchars|xss_clean'
 				);
 			}
 
 			$fields[] = array(
 				'field'   => 	'contact_email',
 				'label'   => 	$this->lang->line('validation_email'),
-				'rules'   => 	'trim|required|max_length[128]|xss_clean|valid_email'
+				'rules'   => 	'trim|required|max_length[128]|xss_clean||htmlspecialchars|valid_email'
 			);
 
 			if($this->settings['active_field_phone'] == 1)
@@ -70,7 +68,7 @@
 				$fields[] = array(
 					'field'   => 	'contact_phone',
 					'label'   => 	$this->lang->line('validation_phone'),
-					'rules'   => 	'trim|required|max_length[16]|numeric|xss_clean'
+					'rules'   => 	'trim|required|max_length[16]|numeric||htmlspecialchars|xss_clean'
 				);
 			}
 
@@ -79,14 +77,14 @@
 				$fields[] = array(
 					'field'   => 	'contact_message',
 					'label'   => 	$this->lang->line('validation_message'),
-					'rules'   => 	'trim|required|max_length[255]|xss_clean'
+					'rules'   => 	'trim|required|max_length[255]||htmlspecialchars|xss_clean'
 				);
 			}
 
 			$fields[] = array(
 				'field'   => 	'contact_captcha',
 				'label'   => 	$this->lang->line('validation_captcha'),
-				'rules'   => 	'trim|required|xss_clean|numeric|exact_length['.$this->system->per_captcha.']|callback_captcha_check'
+				'rules'   => 	'trim|required||htmlspecialchars|xss_clean|numeric|exact_length['.$this->system->per_captcha.']|callback_captcha_check'
 			);
 
 			$this->form_validation->set_rules($fields);
@@ -114,7 +112,7 @@
 				$vals = array(
 					'img_path'	 	=> './'.$this->config->item('medias_folder').'/captcha/',
 					'img_url'	 	=> site_url($this->config->item('medias_folder').'/captcha').'/',
-					'font_path'	 	=> APPPATH . 'views/assets/fonts/Fatboy_Slim.ttf',
+					'font_path'	 	=> APPPATH.'views/assets/fonts/Fatboy_Slim.ttf',
 					'img_width'	 	=> 100,
 					'img_height' 	=> 30,
 					'expiration' 	=> 180,
@@ -131,20 +129,21 @@
 				$this->db->insert('captcha', $data);
 				$this->template['captcha'] = $cap['image'];
 
-				$this->template['contact_firstname'] = $this->sanitation->xss_clean($this->input->post('contact_firstname'));
-				$this->template['contact_lastname'] = $this->sanitation->xss_clean($this->input->post('contact_lastname'));
-				$this->template['contact_email'] = $this->sanitation->xss_clean($this->input->post('contact_email'));
-				$this->template['contact_phone'] = $this->sanitation->xss_clean($this->input->post('contact_phone'));
-				$this->template['contact_message'] = $this->sanitation->xss_clean($this->input->post('contact_message'));
+				$this->template['contact_firstname'] = set_value('contact_firstname');
+				$this->template['contact_lastname'] = set_value('contact_lastname');
+				$this->template['contact_email'] = set_value('contact_email');
+				$this->template['contact_phone'] = set_value('contact_phone');
+				$this->template['contact_message'] = set_value('contact_message');
 
 			}
 			else
 			{
-				$firstname = $this->sanitation->xss_clean($this->input->post('contact_firstname'));
-				$lastname = $this->sanitation->xss_clean($this->input->post('contact_lastname'));
-				$email = $this->sanitation->xss_clean($this->input->post('contact_email'));
-				$phone = $this->sanitation->xss_clean($this->input->post('contact_phone'));
-				$message = $this->sanitation->xss_clean($this->input->post('contact_message'));
+				$firstname = $this->input->post('contact_firstname');
+				$lastname = $this->input->post('contact_lastname');
+				$name = $firstname.' '.$lastname;
+				$email = $this->input->post('contact_email');
+				$phone = $this->input->post('contact_phone');
+				$message = $this->input->post('contact_message');
 
 				$data = array(
 					'firstname'		=> $firstname,
@@ -162,15 +161,15 @@
 
 				$this->load->library('email');
 
-				$this->email->from($email, $name);
+				$this->email->from($email, htmlspecialchars_decode($name));
 				$this->email->to($this->system->site_email);
 				$this->email->subject($this->lang->line('text_subject'));
 
 				$text = '';
-				if($firstname) $text .= $this->lang->line('mail_text_firstname').' '.$firstname."\n\n";
-				if($lastname) $text .= $this->lang->line('mail_text_lastname').' '.$lastname."\n\n";
+				if($firstname) $text .= $this->lang->line('mail_text_firstname').' '.htmlspecialchars_decode($firstname)."\n\n";
+				if($lastname) $text .= $this->lang->line('mail_text_lastname').' '.htmlspecialchars_decode($lastname)."\n\n";
 				if($phone) $text .= $this->lang->line('mail_text_phone').' '.$phone."\n\n";
-				if($message) $text .= $message;
+				if($message) $text .= htmlspecialchars_decode($message);
 
 				$this->email->message($text);
 				$this->email->send();

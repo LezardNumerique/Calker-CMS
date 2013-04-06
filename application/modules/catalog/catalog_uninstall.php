@@ -6,8 +6,8 @@ $this->db->query("DELETE FROM ".$this->db->dbprefix('rights')." WHERE module = '
 //------ TABLE NAVIGATION
 $this->db->query("DELETE FROM ".$this->db->dbprefix('navigation')." WHERE module = 'catalog'");
 //------ TABLE MEDIAS
-$this->db->query("DELETE FROM ".$this->db->dbprefix('medias')." WHERE module = 'categories'");
-$this->db->query("DELETE FROM ".$this->db->dbprefix('medias')." WHERE module = 'products'");
+$this->db->query("DELETE FROM ".$this->db->dbprefix('medias')." WHERE module = 'catalog_categories'");
+$this->db->query("DELETE FROM ".$this->db->dbprefix('medias')." WHERE module = 'catalog_products'");
 //------ TABLE ATTRIBUTES
 $this->db->query("DROP TABLE IF EXISTS ".$this->db->dbprefix('attributes'));
 //------ TABLE ATTRIBUTES LANG
@@ -18,8 +18,14 @@ $this->db->query("DROP TABLE IF EXISTS ".$this->db->dbprefix('attributes_values'
 $this->db->query("DROP TABLE IF EXISTS ".$this->db->dbprefix('attributes_values_lang'));
 //------ TABLE CATEGORIES
 $this->db->query("DROP TABLE IF EXISTS ".$this->db->dbprefix('categories'));
+//------ TABLE CATEGORIES LANG
+$this->db->query("DROP TABLE IF EXISTS ".$this->db->dbprefix('categories_lang'));
+//------ TABLE MANUFACTURERS
+$this->db->query("DROP TABLE IF EXISTS ".$this->db->dbprefix('manufacturers'));
 //------ TABLE PRODUCTS
 $this->db->query("DROP TABLE IF EXISTS ".$this->db->dbprefix('products'));
+//------ TABLE PRODUCTS LANG
+$this->db->query("DROP TABLE IF EXISTS ".$this->db->dbprefix('products_lang'));
 //------ TABLE PRODUCTS ATTRIBUTES VALUES
 $this->db->query("DROP TABLE IF EXISTS ".$this->db->dbprefix('products_to_attributes_values'));
 //------ TABLE PRODUCTS TO CATEGORIES
@@ -36,7 +42,7 @@ if($maps = directory_map('./'.$this->config->item('medias_folder').'/images/'))
 {
 	foreach($maps as $map)
 	{
-		$pos = strpos($map, 'categories');
+		$pos = strpos($map, 'catalog_categories');
 		if ($pos !== false) {
 			if(is_readable('./'.$this->config->item('medias_folder').'/images/'.$map)) unlink('./'.$this->config->item('medias_folder').'/images/'.$map);
 		}
@@ -46,7 +52,7 @@ if($maps = directory_map('./'.$this->config->item('medias_folder').'/images/'))
 {
 	foreach($maps as $map)
 	{
-		$pos = strpos($map, 'products');
+		$pos = strpos($map, 'catalog_products');
 		if ($pos !== false) {
 			if(is_readable('./'.$this->config->item('medias_folder').'/images/'.$map)) unlink('./'.$this->config->item('medias_folder').'/images/'.$map);
 		}

@@ -51,7 +51,8 @@ $this->db->query("CREATE TABLE IF NOT EXISTS ".$this->db->dbprefix('portfolio_ca
   `meta_keywords` varchar(255) DEFAULT NULL,
   `meta_description` varchar(255) DEFAULT NULL,
   `uri` varchar(64) NOT NULL,
-  UNIQUE KEY `categories_id` (`categories_id`,`lang`)
+  UNIQUE KEY `uri` (`uri`,`lang`),
+  KEY `categories_id` (`categories_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;");
 
 $this->db->query("
