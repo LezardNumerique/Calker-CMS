@@ -18,4 +18,4 @@ application/config/database.php
 
 *.gz
 *.log
-index.html
+cache/index.html
