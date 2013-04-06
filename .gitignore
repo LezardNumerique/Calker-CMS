@@ -15,7 +15,7 @@ Icon?
 ehthumbs.db
 Thumbs.db
 application/config/database.php
+cache/index.html
 
 *.gz
 *.log
-cache/index.html
