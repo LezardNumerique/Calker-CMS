@@ -2,7 +2,7 @@
 ######################
 application/logs/
 medias/
-#cache/
+cache/
 
 # OS generated files #
 ######################
@@ -18,4 +18,4 @@ application/config/database.php
 
 *.gz
 *.log
-#cache/index.html
+cache/index.html
