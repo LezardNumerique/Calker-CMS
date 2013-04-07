@@ -164,8 +164,8 @@
 			if(!is_dir(('./'.$this->obj->config->item('cache_folder').'/qrcode.group')))
 				mkdir('./'.$this->obj->config->item('cache_folder').'/qrcode.group');
 				
-			if(!is_dir(('./'.$this->obj->config->item('cache_folder').'/qrcode.group')))
-				mkdir('./'.$this->obj->config->item('cache_folder').'/qrcode.group');	
+			if(!is_dir(('./'.$this->obj->config->item('cache_folder').'/analytics.group')))
+				mkdir('./'.$this->obj->config->item('cache_folder').'/analytics.group');	
 
 			//---- Delete image cache
 			$dir = APPPATH.'views/'.$this->obj->config->item('theme_admin').'/css/.'.$this->obj->config->item('cache_folder');
