@@ -37,8 +37,7 @@ class admin_Model extends CI_Model {
 	}
 
 	public function get_qrcode()
-	{
-		$PNG_TEMP_DIR = dirname(__FILE__).DIRECTORY_SEPARATOR.'temp'.DIRECTORY_SEPARATOR;
+	{		
 		$PNG_WEB_DIR = $this->config->item('medias_folder').'/tmp/';
 		include './'.APPPATH.'/libraries/qrcode/qrlib.php';
 		$filename = './'.$PNG_WEB_DIR.'qrcode.png';

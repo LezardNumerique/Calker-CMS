@@ -154,16 +154,23 @@
 		public function clear_cache()
 		{
 			$this->obj->load->helper('file');
+			
+			//---- Delete folder cache
 			$dir = './'.$this->obj->config->item('cache_folder');
 			if ($handle = opendir($dir))			
-				delete_files($dir, TRUE, $level = 0);
-			
-			$this->obj->load->helper('file');
+				delete_files($dir, TRUE, 0, array('index.html'));
+				
+			//---- Creation dossier cache analytics + qrcode
+			if(!is_dir(('./'.$this->obj->config->item('cache_folder').'/qrcode.group')))
+				mkdir('./'.$this->obj->config->item('cache_folder').'/qrcode.group');
+				
+			if(!is_dir(('./'.$this->obj->config->item('cache_folder').'/qrcode.group')))
+				mkdir('./'.$this->obj->config->item('cache_folder').'/qrcode.group');	
 
 			//---- Delete image cache
 			$dir = APPPATH.'views/'.$this->obj->config->item('theme_admin').'/css/.'.$this->obj->config->item('cache_folder');
 
-			//---- Delete Css cache
+			//---- Delete css cache
 			if ($handle = opendir($dir))			
 				while (false !== ($css_file = readdir($handle)))				
 					if (($css_file != '.') && ($css_file != '..'))					

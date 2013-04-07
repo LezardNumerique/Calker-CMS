@@ -254,7 +254,7 @@
 		{
 			$this->user->check_level($this->template['module'], LEVEL_EDIT);
 
-			$this->system->clear_cache();
+			$this->system->clear_cache();		
 
 			$this->session->set_flashdata('notification', $this->lang->line('notification_cache_performed'));
 

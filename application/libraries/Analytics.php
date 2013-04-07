@@ -57,7 +57,7 @@ class Analytics {
 		$config['source_name']	= $this->obj->system->google_analytic_domain;
 		$config['max_results']	= $this->obj->system->per_page;
 		$config['cache_data'] = TRUE;
-		$config['cache_folder']	= './'.$this->obj->config->item('cache_folder').'/';
+		$config['cache_folder']	= './'.$this->obj->config->item('cache_folder').'/analytics.group/';
 		$config['clear_cache']	= array('date', '1 day ago');
 		$config['debug']		= false;
 
